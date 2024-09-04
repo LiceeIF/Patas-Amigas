@@ -10,6 +10,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import model.Pessoa;
+
 public class XMLWrite {
 
     public static void main(String[] args) {
