@@ -1,15 +1,13 @@
 import java.util.Scanner;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
+import javax.xml.transform.OutputKeys;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
 import model.Pessoa;
 
 public class XMLWrite {
@@ -17,75 +15,50 @@ public class XMLWrite {
     public static void main(String[] args) {
 
         try {
+            Scanner sc = new Scanner(System.in);
+
+            String[] campos = {"nome", "email", "senha", "gênero", "endereço", "telefone", "CPF"};
+            String[] envios = new String[7];
+
+            for (int i = 0; i < campos.length; i++) {
+                System.out.println("Insira seu " + campos[i] + ":");
+                envios[i] = sc.nextLine();
+            }
 
             Pessoa p = new Pessoa();
-            Scanner sc = new Scanner(System.in);
-            
-            System.out.println("Insira seu nome:");
-            p.setNome(sc.nextLine());
-
-            System.out.println("Insira seu email:");
-            p.setEmail(sc.nextLine());
-
-            System.out.println("Insira sua senha:");
-            p.setSenha(sc.nextLine());
-
-            System.out.println("Insira seu gênero:");
-            p.setGenero(sc.nextLine());
-
-            System.out.println("Insira seu endereço:");
-            p.setEndereco(sc.nextLine());
-
-            System.out.println("Insira seu telefone:");
-            p.setTelefone(sc.nextLine());
+            p.setNome(envios[0]);
+            p.setEmail(envios[1]);
+            p.setSenha(envios[2]);
+            p.setGenero(envios[3]);
+            p.setEndereco(envios[4]);
+            p.setTelefone(envios[5]);
+            p.setCpf(envios[6]);
 
             sc.close();
 
-            // Cria uma instância de DocumentBuilderFactory
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-            // Cria um DocumentBuilder
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            // Cria um novo documento XML
             Document document = builder.newDocument();
 
-            // Cria o elemento raiz
             Element rootElement = document.createElement("pessoa");
             document.appendChild(rootElement);
 
-            // Cria e adiciona os elementos filhos
-            Element nome = document.createElement("nome");
-            nome.appendChild(document.createTextNode(p.getNome()));
-            rootElement.appendChild(nome);
+            criarElemento(document, rootElement, "nome", p.getNome());
+            criarElemento(document, rootElement, "email", p.getEmail());
+            criarElemento(document, rootElement, "senha", p.getSenha());
+            criarElemento(document, rootElement, "genero", p.getGenero());
+            criarElemento(document, rootElement, "endereco", p.getEndereco());
+            criarElemento(document, rootElement, "telefone", p.getTelefone());
+            criarElemento(document, rootElement, "cpf", p.getCpf());
 
-            Element email = document.createElement("email");
-            email.appendChild(document.createTextNode(p.getEmail()));
-            rootElement.appendChild(email);
-
-            Element senha = document.createElement("senha");
-            senha.appendChild(document.createTextNode(p.getSenha()));
-            rootElement.appendChild(senha);
-
-            Element genero = document.createElement("genero");
-            genero.appendChild(document.createTextNode(p.getGenero()));
-            rootElement.appendChild(genero);
-
-            Element endereco = document.createElement("endereco");
-            endereco.appendChild(document.createTextNode(p.getEndereco()));
-            rootElement.appendChild(endereco);
-
-            Element telefone = document.createElement("telefone");
-            telefone.appendChild(document.createTextNode(p.getTelefone()));
-            rootElement.appendChild(telefone);
-
-            // Cria um Transformer para converter o documento para XML
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
             DOMSource source = new DOMSource(document);
             StreamResult result = new StreamResult("pessoa.xml");
 
-            // Escreve o documento XML para o arquivo
             transformer.transform(source, result);
 
             System.out.println("Arquivo XML criado com sucesso!");
@@ -93,5 +66,11 @@ public class XMLWrite {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void criarElemento(Document doc, Element root, String nome, String valor) {
+        Element elemento = doc.createElement(nome);
+        elemento.appendChild(doc.createTextNode(valor));
+        root.appendChild(elemento);
     }
 }

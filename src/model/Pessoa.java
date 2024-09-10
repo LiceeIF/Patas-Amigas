@@ -66,7 +66,6 @@ public class Pessoa  {
     }
 
     public void setCpf(String cpf) {
-
         this.cpf = cpf;
     }
 
@@ -91,7 +90,6 @@ public class Pessoa  {
     }
 
     public Boolean validarSenha(){
-        // Tamano tem que ser maior ou igual a 12 tem que ter letra maiuscula minuscula e caracter especial
         return senha.length() >= 12 &&
                 senha.matches(".*[A-Z].*") &&
                 senha.matches(".*[a-z].*") &&
@@ -99,8 +97,7 @@ public class Pessoa  {
                 senha.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\|,.<>\\/?].*");
     }
 
-
-    public Boolean validarCPF() {
+    public Boolean validarCPF(String cpf) {
         cpf = cpf.replaceAll("[.-]", "");
         if (cpf.length() != 11) {
             return false;

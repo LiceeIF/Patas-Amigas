@@ -1,1 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><pessoa><nome>Joao</nome><email>asd</email><senha>asd</senha><genero>asd</genero><endereco>asd</endereco><telefone>asd</telefone></pessoa>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pessoa>
+    <nome>Joao</nome>
+    <email>joao</email>
+    <senha>asd</senha>
+    <genero>asd</genero>
+    <endereco>asd</endereco>
+    <telefone>asd</telefone>
+    <cpf>asd</cpf>
+</pessoa>
