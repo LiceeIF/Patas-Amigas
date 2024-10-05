@@ -1,4 +1,4 @@
-# PatasAmigas
+# Patas Amigas
 
 ## Apresentação
 **PatasAmigas** é uma aplicação web dedicada à divulgação de animais disponíveis para adoção, facilitando a busca pelo animal ideal. A plataforma tem como objetivo impulsionar a adoção de animais em situação de vulnerabilidade, garantindo que o foco esteja no encontro de um bom lar para cada animal.
