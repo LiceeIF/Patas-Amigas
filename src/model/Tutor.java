@@ -1,11 +1,16 @@
 package model;
 import java.util.Date;
 
-public class Tutor extends  Pessoa{
+public class Tutor extends Pessoa {
 
     private int idTutor;
     private int numDeAnimais;
     private String adocoes;
+
+    // Construtor padrão
+    public Tutor() {
+        super(); // Chama o construtor da classe pai
+    }
 
     public Tutor(int idTutor, int numDeAnimais, String adocoes) {
         this.idTutor = idTutor;

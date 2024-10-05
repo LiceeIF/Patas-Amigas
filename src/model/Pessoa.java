@@ -44,7 +44,6 @@ public class Pessoa  {
         return email;
     }   
 
-
     public Date getDataDeNascimento() {
         return dataDeNascimento;
     }

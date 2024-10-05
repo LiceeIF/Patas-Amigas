@@ -1,19 +1,24 @@
 package model;
 import java.util.Date;
 
-public class Adotantes extends Pessoa {
+public class Adotante extends Pessoa {
 
     private int idAdotante;
     private String preferenciasDeAdocao;
     private String adocoes;
 
-    public Adotantes(int idAdotante, String preferenciasDeAdocao, String adocoes) {
+    // Construtor padrão
+    public Adotante() {
+        super(); // Chama o construtor da classe pai
+    }
+
+    public Adotante(int idAdotante, String preferenciasDeAdocao, String adocoes) {
         this.idAdotante = idAdotante;
         this.preferenciasDeAdocao = preferenciasDeAdocao;
         this.adocoes = adocoes;
     }
 
-    public Adotantes(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha, int idAdotante, String preferenciasDeAdocao, String adocoes) {
+    public Adotante(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha, int idAdotante, String preferenciasDeAdocao, String adocoes) {
         super(nome, dataDeNascimento, genero, cpf, endereco, telefone, email, senha);
         this.idAdotante = idAdotante;
         this.preferenciasDeAdocao = preferenciasDeAdocao;
