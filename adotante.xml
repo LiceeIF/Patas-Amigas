@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<adotante>
+    <nome>Alice Maria </nome>
+    <data_nascimento>08/03/1971</data_nascimento>
+    <genero>Feminino</genero>
+    <cpf>91441019022</cpf>
+    <endereco>Rua Pari</endereco>
+    <telefone>1126711265</telefone>
+    <email>alicemaria@gmail.com</email>
+    <senha>AliceMaria*123456</senha>
+    <id_adotante>4</id_adotante>
+    <preferencias_de_adocao>Cachorros Grandes</preferencias_de_adocao>
+    <adoções>5</adoções>
+</adotante>

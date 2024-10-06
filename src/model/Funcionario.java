@@ -1,9 +1,12 @@
 package model;
-import java.util.Date;
 
-public  class Funcionario extends Pessoa {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+public class Funcionario extends Pessoa {
     private int idFuncionario;
-    private Date dataContratacao;
+    private LocalDate dataContratacao;
     private String cargo;
     private float salario;
     private String departamento;
@@ -13,10 +16,12 @@ public  class Funcionario extends Pessoa {
         super(); // Chama o construtor da classe pai
     }
 
-    public Funcionario(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha, int idFuncionario, Date dataContratacao, String cargo, float salario, String departamento) {
+    public Funcionario(String nome, String dataDeNascimento, String genero, String cpf, String endereco, String telefone, 
+                       String email, String senha, int idFuncionario, String dataContratacao, String cargo, 
+                       float salario, String departamento) {
         super(nome, dataDeNascimento, genero, cpf, endereco, telefone, email, senha);
         this.idFuncionario = idFuncionario;
-        this.dataContratacao = dataContratacao;
+        setDataContratacao(dataContratacao);
         this.cargo = cargo;
         this.salario = salario;
         this.departamento = departamento;
@@ -30,12 +35,23 @@ public  class Funcionario extends Pessoa {
         this.idFuncionario = idFuncionario;
     }
 
-    public Date getDataContratacao() {
+    public LocalDate getDataContratacao() {
         return dataContratacao;
     }
 
-    public void setDataContratacao(Date dataContratacao) {
-        this.dataContratacao = dataContratacao;
+    // Validação e conversão da data de contratação
+    public void setDataContratacao(String data) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate dataContratacao = LocalDate.parse(data, formatter);
+
+            if (dataContratacao.isAfter(LocalDate.now())) {
+                throw new IllegalArgumentException("Data de contratação não pode ser uma data futura.");
+            }
+            this.dataContratacao = dataContratacao;
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Data de contratação inválida. Use o formato dd/MM/yyyy.");
+        }
     }
 
     public String getCargo() {
@@ -60,5 +76,14 @@ public  class Funcionario extends Pessoa {
 
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario [Nome=" + getNome() + ", Data de Nascimento=" + getDataDeNascimento() + 
+               ", Gênero=" + getGenero() + ", CPF=" + getCpf() + ", Endereço=" + getEndereco() + 
+               ", Telefone=" + getTelefone() + ", Email=" + getEmail() + ", ID Funcionario=" + idFuncionario + 
+               ", Data de Contratação=" + dataContratacao + ", Cargo=" + cargo + ", Salário=" + salario + 
+               ", Departamento=" + departamento + "]";
     }
 }

@@ -14,15 +14,15 @@ public class Animal {
     private String statysDeAdocao;
 
     public Animal(String nome, String especie, String raca, int idade, String sexo, String historicoMedico, Date dataDeResgate, String foto, String statysDeAdocao) {
-        this.nome = nome;
+        setNome(nome);
         this.especie = especie;
         this.raca = raca;
-        this.idade = idade;
+        setIdade(idade);
         this.sexo = sexo;
         this.historicoMedico = historicoMedico;
         this.dataDeResgate = dataDeResgate;
         this.foto = foto;
-        this.statysDeAdocao = statysDeAdocao;
+        setStatysDeAdocao(statysDeAdocao);
     }
 
     public String getNome() {
@@ -30,6 +30,10 @@ public class Animal {
     }
 
     public void setNome(String nome) {
+
+        if (nome == null|| nome.trim().isEmpty()){
+            throw new IllegalArgumentException("Nome não pode ser nulo");
+        }
         this.nome = nome;
     }
 
@@ -53,8 +57,14 @@ public class Animal {
         return idade;
     }
 
+   
     public void setIdade(int idade) {
-        this.idade = idade;
+
+        if (idade < 0){
+            throw new IllegalArgumentException("A idade não pode ser negativa.");
+        }
+
+        this.idade = idade;     
     }
 
     public String getHistoricoMedico() {
@@ -94,6 +104,11 @@ public class Animal {
     }
 
     public void setStatysDeAdocao(String statysDeAdocao) {
+
+        if (statysDeAdocao == null) {
+            throw new IllegalArgumentException("O status de adoção é obrigatório.");
+        }
+        
         this.statysDeAdocao = statysDeAdocao;
     }
 }

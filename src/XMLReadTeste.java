@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 
-public class XMLRead {
+public class XMLReadTeste {
 
     public static void main(String[] args) {
 

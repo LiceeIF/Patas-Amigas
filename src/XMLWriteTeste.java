@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,29 +12,31 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import model.Pessoa;
 
-public class XMLWrite {
+public class XMLWriteTeste {
 
     public static void main(String[] args) {
 
         try {
             Scanner sc = new Scanner(System.in);
 
-            String[] campos = {"nome", "email", "senha", "gênero", "endereço", "telefone", "CPF"};
-            String[] envios = new String[7];
+            String[] campos = {"nome", "data de nascimento","email", "senha", "gênero", "endereço", "telefone", "CPF"};
+            String[] envios = new String[8];
 
             for (int i = 0; i < campos.length; i++) {
                 System.out.println("Insira seu " + campos[i] + ":");
                 envios[i] = sc.nextLine();
             }
 
-            Pessoa p = new Pessoa();
-            p.setNome(envios[0]);
-            p.setEmail(envios[1]);
-            p.setSenha(envios[2]);
-            p.setGenero(envios[3]);
-            p.setEndereco(envios[4]);
-            p.setTelefone(envios[5]);
-            p.setCpf(envios[6]);
+            String nome = envios[0];
+            String nascimento = envios[1];
+            String email = envios[2];
+            String senha = envios[3];
+            String genero = envios[4];
+            String endereco = envios[5];
+            String telefone = envios[6];
+            String cpf = envios[7];
+
+            Pessoa p = new Pessoa(nome,nascimento,genero,cpf,endereco,telefone,email,senha );
 
             sc.close();
 
@@ -45,10 +49,14 @@ public class XMLWrite {
             Element rootElement = document.createElement("pessoa");
             document.appendChild(rootElement);
 
+            LocalDate dataDeNascimento = LocalDate.parse(nascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String dataStr = dataDeNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
             criarElemento(document, rootElement, "nome", p.getNome());
             criarElemento(document, rootElement, "email", p.getEmail());
             criarElemento(document, rootElement, "senha", p.getSenha());
             criarElemento(document, rootElement, "genero", p.getGenero());
+            criarElemento(document, rootElement, "data_nascimento", dataStr);
             criarElemento(document, rootElement, "endereco", p.getEndereco());
             criarElemento(document, rootElement, "telefone", p.getTelefone());
             criarElemento(document, rootElement, "cpf", p.getCpf());

@@ -1,10 +1,9 @@
 package model;
-import java.util.Date;
 
 public class Tutor extends Pessoa {
 
     private int idTutor;
-    private int numDeAnimais;
+    private int nAnimais;
     private String adocoes;
 
     // Construtor padrão
@@ -14,16 +13,18 @@ public class Tutor extends Pessoa {
 
     public Tutor(int idTutor, int numDeAnimais, String adocoes) {
         this.idTutor = idTutor;
-        this.numDeAnimais = numDeAnimais;
+        this.nAnimais = numDeAnimais;
         this.adocoes = adocoes;
     }
 
-    public Tutor(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha, int idTutor, int numDeAnimais, String adocoes) {
-        super(nome, dataDeNascimento, genero, cpf, endereco, telefone, email, senha);
+    public Tutor(String nome, String nascdate, String genero, String cpf, String endereco, String telefone, 
+                 String email, String senha, int idTutor, int nAnimais, String adocoes) {
+        super(nome, nascdate, genero, cpf, endereco, telefone, email, senha);
         this.idTutor = idTutor;
-        this.numDeAnimais = numDeAnimais;
+        this.nAnimais = nAnimais;
         this.adocoes = adocoes;
     }
+
 
     public int getIdTutor() {
         return idTutor;
@@ -33,12 +34,12 @@ public class Tutor extends Pessoa {
         this.idTutor = idTutor;
     }
 
-    public int getNumDeAnimais() {
-        return numDeAnimais;
+    public int getnAnimais() {
+        return nAnimais;
     }
 
-    public void setNumDeAnimais(int numDeAnimais) {
-        this.numDeAnimais = numDeAnimais;
+    public void setNumDeAnimais(int nAnimais) {
+        this.nAnimais = nAnimais;
     }
 
     public String getAdocoes() {
@@ -47,5 +48,11 @@ public class Tutor extends Pessoa {
 
     public void setAdocoes(String adocoes) {
         this.adocoes = adocoes;
+    }
+
+    @Override
+    public String toString() {
+        return "Tutor [Nome: " + getNome() + ", CPF: " + getCpf() + ", Número de Animais: " + nAnimais + 
+               ", Adoções: " + adocoes + "]";
     }
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <pessoa>
-    <nome>Joao</nome>
-    <email>joao</email>
-    <senha>asd</senha>
-    <genero>asd</genero>
-    <endereco>asd</endereco>
-    <telefone>asd</telefone>
-    <cpf>asd</cpf>
+    <nome>Willy</nome>
+    <email>willy@gmail.com</email>
+    <senha>willy12345</senha>
+    <genero>masculino</genero>
+    <data_nascimento>22/07/2005</data_nascimento>
+    <endereco>Rua Sem Sa¡da </endereco>
+    <telefone>1123334222</telefone>
+    <cpf>345858455</cpf>
 </pessoa>

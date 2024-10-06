@@ -34,120 +34,227 @@ public class Main {
                     listarUsuarios();
                     break;
                 case 5:
+                    listarEspecificos("Tutor");
+                    break;
+                case 6:
+                    listarEspecificos("Adotante");
+                    break;
+                case 7:
+                    listarEspecificos("Funcionario");
+                    break;
+                case 8:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 5);
+        } while (opcao != 8);
 
         scanner.close();
-    }
+    }   
 
     public static void mostrarMenu() {
         System.out.println("\n=== Menu ===");
         System.out.println("1. Cadastrar Tutor");
         System.out.println("2. Cadastrar Adotante");
         System.out.println("3. Cadastrar Funcionário");
-        System.out.println("4. Listar Usuários");
-        System.out.println("5. Sair");
+        System.out.println("4. Listar todos os usuários");
+        System.out.println("5. Listar os tutores");
+        System.out.println("6. Listar os adotantes");
+        System.out.println("7. Listar os funcionários");
+        System.out.println("8. Sair");
         System.out.print("Escolha uma opção: ");
     }
-
-    public static void cadastrarTutor(Scanner scanner) {
+public static void cadastrarTutor(Scanner scanner) {
         System.out.println("\n=== Cadastro de Tutor ===");
-        Pessoa tutor = new Tutor();
 
         // Solicitar dados do tutor
         System.out.print("Nome: ");
-        tutor.setNome(scanner.nextLine());
+        String nome = scanner.nextLine();
+
+        System.out.println("Data de Nascimento:");
+        System.out.println("Ex: dd/MM/aaaa");
+        String nascdate = scanner.nextLine();
         
         System.out.print("Gênero: ");
-        tutor.setGenero(scanner.nextLine());
+        String genero = scanner.nextLine();
 
         System.out.print("CPF: ");
-        tutor.setCpf(scanner.nextLine());
+        String cpf = scanner.nextLine();
 
         System.out.print("Endereço: ");
-        tutor.setEndereco(scanner.nextLine());
+        String endereco = scanner.nextLine();
 
         System.out.print("Telefone: ");
-        tutor.setTelefone(scanner.nextLine());
+        String telefone = scanner.nextLine();
 
         System.out.print("Email: ");
-        tutor.setEmail(scanner.nextLine());
+        String email = scanner.nextLine();
+
+        System.out.println("Senha: ");
+        System.out.println("A senha deve ter pelo menos 12 caracteres e incluir letras maiúsculas, minúsculas, números e caracteres especiais.");
+        String senha = scanner.nextLine();
+
+        System.out.print("ID: ");
+        int id = scanner.nextInt();
+
+        System.out.print("Número de animais: ");
+        int nAnimais = scanner.nextInt();
+        scanner.nextLine();  
+
+        System.out.print("Adoções: ");
+        String adocoes = scanner.nextLine();
 
         // Adicionar o tutor à lista de usuários
+        Tutor tutor = new Tutor(nome, nascdate, genero, cpf, endereco, telefone, email, senha, id, nAnimais,adocoes);
         usuarios.add(tutor);
+        GerarXML.gerarXmlTutor(tutor);
+
         System.out.println("Tutor cadastrado com sucesso!");
     }
 
+
     public static void cadastrarAdotante(Scanner scanner) {
         System.out.println("\n=== Cadastro de Adotante ===");
-        Pessoa adotante = new Adotante();
 
         // Solicitar dados do adotante
         System.out.print("Nome: ");
-        adotante.setNome(scanner.nextLine());
+        String nome = scanner.nextLine();
+
+        System.out.println("Data de Nascimento:");
+        System.out.println("Ex: dd/MM/aaaa");
+        String nascDate = scanner.nextLine();
 
         System.out.print("Gênero: ");
-        adotante.setGenero(scanner.nextLine());
-
+        String genero = scanner.nextLine();
+    
         System.out.print("CPF: ");
-        adotante.setCpf(scanner.nextLine());
+        String cpf = scanner.nextLine();
 
         System.out.print("Endereço: ");
-        adotante.setEndereco(scanner.nextLine());
+        String endereco = scanner.nextLine();
 
         System.out.print("Telefone: ");
-        adotante.setTelefone(scanner.nextLine());
+        String telefone = scanner.nextLine();
 
         System.out.print("Email: ");
-        adotante.setEmail(scanner.nextLine());
+        String email = scanner.nextLine();
+
+        System.out.println("Senha:");
+        System.out.println("A senha deve ter pelo menos 12 caracteres e incluir letras maiúsculas, minúsculas, números e caracteres especiais.");
+        String senha = scanner.nextLine();
+
+        System.out.print("ID Adotante: ");
+        int idAdotante = scanner.nextInt();
+        scanner.nextLine();  
+
+        System.out.println("Preferencias: ");
+        String preferencias = scanner.nextLine();
+
+        System.out.print("Adocoes: ");
+        String adocoes = scanner.nextLine();
+
 
         // Adicionar o adotante à lista de usuários
+        Adotante adotante = new Adotante(nome,nascDate,genero,cpf,endereco,telefone,email,senha,idAdotante,preferencias,adocoes);
         usuarios.add(adotante);
         System.out.println("Adotante cadastrado com sucesso!");
+        GerarXML.gerarXmlAdotante(adotante);
+
     }
 
     public static void cadastrarFuncionario(Scanner scanner) {
         System.out.println("\n=== Cadastro de Funcionário ===");
-        Pessoa funcionario = new Funcionario();
-
+    
         // Solicitar dados do funcionário
         System.out.print("Nome: ");
-        funcionario.setNome(scanner.nextLine());
-
-       // System.out.print("Data de Nascimento: ");
-        //funcionario.setDataNascimento(scanner.nextLine());
-
+        String nome = scanner.nextLine();
+    
+        System.out.println("Data de Nascimento: ");
+        System.out.println("Ex: dd/MM/aaaa");
+        String nascDate = scanner.nextLine();
+    
         System.out.print("Gênero: ");
-        funcionario.setGenero(scanner.nextLine());
-
+        String genero = scanner.nextLine();
+        
         System.out.print("CPF: ");
-        funcionario.setCpf(scanner.nextLine());
-
+        String cpf = scanner.nextLine();
+    
         System.out.print("Endereço: ");
-        funcionario.setEndereco(scanner.nextLine());
-
+        String endereco = scanner.nextLine();
+    
         System.out.print("Telefone: ");
-        funcionario.setTelefone(scanner.nextLine());
-
+        String telefone = scanner.nextLine();
+    
         System.out.print("Email: ");
-        funcionario.setEmail(scanner.nextLine());
-
+        String email = scanner.nextLine();
+    
+        System.out.println("Senha:");
+        System.out.println("A senha deve ter pelo menos 12 caracteres e incluir letras maiúsculas, minúsculas, números e caracteres especiais.");
+        String senha = scanner.nextLine();
+    
+        System.out.print("ID: ");
+        int idFuncionario = scanner.nextInt();
+        scanner.nextLine();  
+    
+        System.out.print("Data de contratação: ");
+        String dataContratacao = scanner.nextLine();
+    
+        System.out.print("Cargo: ");
+        String cargo = scanner.nextLine();
+    
+        System.out.print("Salário: ");
+        float salario = scanner.nextFloat();
+        scanner.nextLine();  
+    
+        System.out.print("Departamento: ");
+        String departamento = scanner.nextLine();
+    
+        Funcionario funcionario = new Funcionario(nome, nascDate, genero, cpf, endereco, telefone, email, senha, idFuncionario, dataContratacao, cargo, salario, departamento);
         usuarios.add(funcionario);
         System.out.println("Funcionário cadastrado com sucesso!");
+        GerarXML.gerarXmlFuncionario(funcionario);
     }
+    
 
-    public static void listarUsuarios() {
-        System.out.println("\n=== Lista de Usuários Cadastrados ===");
-        if (usuarios.isEmpty()) {
-            System.out.println("Nenhum usuário cadastrado.");
-        } else {
-            for (Pessoa usuario : usuarios) {
-                System.out.println("Nome: " + usuario.getNome());
-            }
+
+public static void listarUsuarios() {
+    System.out.println("\n=== Lista de Usuários Cadastrados ===");
+    if (usuarios.isEmpty()) {
+        System.out.println("Nenhum usuário cadastrado.");
+    } else {
+        for (Pessoa usuario : usuarios) {
+            System.out.println("Nome: " + usuario.getNome() + " || Tipo: " + usuario.getClass().getSimpleName());
         }
     }
+}
+
+
+public static void listarEspecificos(String tipo) {
+
+    if (tipo == "Tutor"){
+        System.out.println("\n=== Lista de " + tipo + "es Cadastrados ===");
+    } else {
+        System.out.println("\n=== Lista de " + tipo + "s Cadastrados ===");
+    }
+
+    boolean found = false;
+
+    if (usuarios.isEmpty()) {
+        System.out.println("Nenhum " + tipo + " cadastrado.");
+    } else {
+        for (Pessoa usuario : usuarios) {
+            // usuario pertence a classe desejada
+            if (usuario.getClass().getSimpleName().equalsIgnoreCase(tipo)) {
+                System.out.println(usuario.toString());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Nenhum " + tipo + " cadastrado.");
+        }
+    }
+}
+
+
 }

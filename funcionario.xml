@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<funcionario>
+    <nome>Honore de Balzac</nome>
+    <data_nascimento>20/03/1990</data_nascimento>
+    <genero>Masculino</genero>
+    <cpf>87907016070</cpf>
+    <endereco>Paris Street</endereco>
+    <telefone>1121931807</telefone>
+    <email>balzac@gmail.com</email>
+    <senha>Balzac*IlusoesPerdidas*1912</senha>
+    <id_funcionario>14</id_funcionario>
+    <dataContratacao>14/04/2014</dataContratacao>
+    <cargo>Gerente</cargo>
+    <salario>7890.5</salario>
+    <departamento>Administracao</departamento>
+</funcionario>
