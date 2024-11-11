@@ -1,0 +1,5 @@
+model\Animal.class
+model\Pessoa.class
+model\Adotante.class
+model\Funcionario.class
+model\Tutor.class
