@@ -1,16 +1,8 @@
-*.class
-*.war
-*.jar
-
-/build/
-/target/
-
-.vscode/
-
-.idea/
-*.iml
-*.log
-
-*.tmp
-*.swp
-.DS_Store
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml

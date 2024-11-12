@@ -1,0 +1,21 @@
+# Ignore arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Pastas e arquivos gerados pelo Maven
+/target/
+/*.log
+
+# Pastas da IDE
+.idea/
+/.vscode/
+
+# Arquivos de dependências locais
+/.m2/
+
+# Arquivos de compilação
+*.class
+*.jar
+
+# Arquivos de configuração temporários
+*.iml
