@@ -19,4 +19,6 @@ Desenvolver uma aplicação web robusta e eficiente que automatize o processo de
 - Utilização de um banco de dados relacional (MySQL) para armazenar as informações dos usuários e animais
 - O modelo base do banco de dados relacional pode ser alterado, documentando as alterações necessárias.
 
-
+``` mvn clean install```
+<br>
+``` mvn tomcat7:run```

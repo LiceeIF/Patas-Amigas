@@ -1,4 +1,4 @@
-package com.example.model;
+package com.exemplo.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,14 +18,14 @@ public class Pessoa {
     public Pessoa() {}
 
     public Pessoa(String nome, String dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha) {
-        setNome(nome);
+        this.nome = nome;
         this.dataDeNascimento = convertDate(dataDeNascimento);
-        setGenero(genero);
-        setCpf(cpf);
-        setEndereco(endereco);
-        setTelefone(telefone);
-        setEmail(email);
-        setSenha(senha);
+        this.genero = genero;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
     }
 
     public String getNome() {

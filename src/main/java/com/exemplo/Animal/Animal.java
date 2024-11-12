@@ -1,4 +1,4 @@
-package com.example.model;
+package com.exemplo.model;
 import java.util.Date;
 
 public class Animal {
@@ -11,7 +11,7 @@ public class Animal {
     private String historicoMedico;
     private Date dataDeResgate;
     private String foto;
-    private String statysDeAdocao;
+    private String statusDeAdocao;
 
     public Animal(String nome, String especie, String raca, int idade, String sexo, String historicoMedico, Date dataDeResgate, String foto, String statusDeAdocao) {
         this.nome = nome;
@@ -22,7 +22,7 @@ public class Animal {
         this.historicoMedico = historicoMedico;
         this.dataDeResgate = dataDeResgate;
         this.foto = foto;
-        this.statysDeAdocao = statusDeAdocao;
+        this.statusDeAdocao = statusDeAdocao;
     }
 
     public String getNome() {
@@ -52,10 +52,7 @@ public class Animal {
     public void setRaca(String raca) {
         this.raca = raca;
     }
-
-    public int getIdade() {
-        return idade;
-    }
+    
 
    
     public void setIdade(int idade) {
@@ -99,16 +96,16 @@ public class Animal {
         this.foto = foto;
     }
 
-    public String getStatysDeAdocao() {
-        return statysDeAdocao;
+    public String getStatusDeAdocao() {
+        return statusDeAdocao;
     }
 
-    public void setStatysDeAdocao(String statysDeAdocao) {
+    public void setStatusDeAdocao(String statusDeAdocao) {
 
-        if (statysDeAdocao == null) {
+        if (statusDeAdocao == null) {
             throw new IllegalArgumentException("O status de adoção é obrigatório.");
         }
         
-        this.statysDeAdocao = statysDeAdocao;
+        this.statusDeAdocao = statusDeAdocao;
     }
 }

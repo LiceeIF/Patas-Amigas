@@ -1,4 +1,4 @@
-package com.example.model;
+package com.exemplo.model;
 
 public class Adotante extends Pessoa {
 

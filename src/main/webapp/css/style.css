@@ -7,13 +7,24 @@ body {
     height: 100vh;
 }
 
+#main button {
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: larger;
+    padding: 5px 10px;
+    
+}
+
 #main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    height: 100%;
 }
+
+
 
 h1 {
     font-size: 2rem;
@@ -24,6 +35,8 @@ h1 {
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
     width: 100%;
     margin-top: 20px;
 }

@@ -1,4 +1,4 @@
-package com.example.model;
+package com.exemplo.model;
 import java.util.Date;
 
 public class Funcionario extends Pessoa {
