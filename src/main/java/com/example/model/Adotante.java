@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 public class Adotante extends Pessoa {
 
@@ -6,9 +6,8 @@ public class Adotante extends Pessoa {
     private String preferenciasDeAdocao;
     private String adocoes;
 
-    // Construtor padrão
     public Adotante() {
-        super(); // Chama o construtor da classe pai
+        super(); 
     }
 
     public Adotante(String nome, String nascDate, String genero, String cpf, String endereco, String telefone, 

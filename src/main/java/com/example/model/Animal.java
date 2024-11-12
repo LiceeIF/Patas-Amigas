@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 import java.util.Date;
 
 public class Animal {
@@ -13,16 +13,16 @@ public class Animal {
     private String foto;
     private String statysDeAdocao;
 
-    public Animal(String nome, String especie, String raca, int idade, String sexo, String historicoMedico, Date dataDeResgate, String foto, String statysDeAdocao) {
-        setNome(nome);
+    public Animal(String nome, String especie, String raca, int idade, String sexo, String historicoMedico, Date dataDeResgate, String foto, String statusDeAdocao) {
+        this.nome = nome;
         this.especie = especie;
         this.raca = raca;
-        setIdade(idade);
+        this.idade = idade;
         this.sexo = sexo;
         this.historicoMedico = historicoMedico;
         this.dataDeResgate = dataDeResgate;
         this.foto = foto;
-        setStatysDeAdocao(statysDeAdocao);
+        this.statysDeAdocao = statusDeAdocao;
     }
 
     public String getNome() {

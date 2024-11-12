@@ -1,27 +1,23 @@
-package model;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+package com.example.model;
+import java.util.Date;
 
 public class Funcionario extends Pessoa {
     private int idFuncionario;
-    private LocalDate dataContratacao;
+    private Date dataContratacao;
     private String cargo;
     private float salario;
     private String departamento;
 
-    // Construtor padrão
     public Funcionario() {
-        super(); // Chama o construtor da classe pai
+        super(); 
     }
 
     public Funcionario(String nome, String dataDeNascimento, String genero, String cpf, String endereco, String telefone, 
-                       String email, String senha, int idFuncionario, String dataContratacao, String cargo, 
+                       String email, String senha, int idFuncionario, Date dataContratacao, String cargo, 
                        float salario, String departamento) {
         super(nome, dataDeNascimento, genero, cpf, endereco, telefone, email, senha);
         this.idFuncionario = idFuncionario;
-        setDataContratacao(dataContratacao);
+        this.dataContratacao = dataContratacao;
         this.cargo = cargo;
         this.salario = salario;
         this.departamento = departamento;
@@ -35,23 +31,13 @@ public class Funcionario extends Pessoa {
         this.idFuncionario = idFuncionario;
     }
 
-    public LocalDate getDataContratacao() {
+    public Date getDataContratacao() {
         return dataContratacao;
     }
 
-    // Validação e conversão da data de contratação
-    public void setDataContratacao(String data) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataContratacao = LocalDate.parse(data, formatter);
+    public void setDataContratacao(Date dataContratacao) {
+        this.dataContratacao = dataContratacao;
 
-            if (dataContratacao.isAfter(LocalDate.now())) {
-                throw new IllegalArgumentException("Data de contratação não pode ser uma data futura.");
-            }
-            this.dataContratacao = dataContratacao;
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Data de contratação inválida. Use o formato dd/MM/yyyy.");
-        }
     }
 
     public String getCargo() {
