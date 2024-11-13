@@ -1,10 +1,9 @@
 body {
-    background-color: bisque;
+    background-color: #fff5ec;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 5px;
     box-sizing: border-box;
-    height: 100vh;
+    height: 85vh;
 }
 
 #main button {
@@ -31,15 +30,24 @@ body {
     flex-direction: column;
     background-color: azure;
     z-index: 4;
+    max-width: 60%;
 }
 
 #logo_div a{
-    color: antiquewhite;
+
+    color: black;
     font-size: 1rem;
     margin: 10px;
-    background-color: black;
-    padding: 1rem;
-    border-radius: 23px;
+    background-color: #f5bd63;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border-radius: 13px;
+    transition: all 200ms ease-in-out;
+    text-decoration: none;
+}
+
+#logo_div a:hover{
+    background-color: #f278a1;
+    color: #fff5ec;
 }
 
 
@@ -84,6 +92,55 @@ h1 {
     animation: next 1.4s 24s forwards;
 }
 
+.colaboradores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: beige;
+    font-weight: bold;
+    width: 25%;
+
+}
+
+.github{
+    width: 100%;
+    background: #f5bd63;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 1rem;
+}
+
+
+.github button{
+    position: relative;
+    margin: 30px;
+    height: 140px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin:40px  100px ;
+
+}
+
+.github img{
+    height: 140px;
+    border-radius: 100%;
+}
+
+
+.github button:hover {
+    transition: background 700ms ease, transform 700ms ease;
+    box-shadow: 0 0 40px #f278a1;
+    transform: scale(1.30);
+    
+}
+
+.github button:not(:hover) {
+    transition: box-shadow 700ms ease, transform 700ms ease;
+    transform: scale(1);
+}
+
 @keyframes appering {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -109,9 +166,38 @@ h1 {
     .photos img {
         width: 45%;
     }
+    .github {
+        justify-content: space-around;
+    }
+
+    .colaboradores {
+        width: 25%; 
+    }
 }
 
 @media screen and (max-width: 599px) {
+
+    .github {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .colaboradores {
+        width: 80%; 
+        margin-bottom: 20px; 
+    }
+
+    .github button {
+        margin: 20px;
+        height: 100px;
+        width: 100px; 
+    }
+
+    .github img {
+        height: 100px;
+        width: 100px; 
+    }
     h1 {
         font-size: 1.5rem;
     }

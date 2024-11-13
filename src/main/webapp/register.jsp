@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patas Amigas</title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+
     <script>
         function toggleFormFields() {
-            var userType = document.querySelector('input[name="userType"]:checked').value;
-            
+            var contaTipo = document.querySelector('input[name="contaTipo"]:checked').value;
+            if (!contaTipo) return; 
             document.getElementById('tutorFields').style.display = 'none';
             document.getElementById('funcionarioFields').style.display = 'none';
             document.getElementById('adotanteFields').style.display = 'none';
 
-            if (userType === 'tutor') {
+            if (contaTipo === 'tutor') {
                 document.getElementById('tutorFields').style.display = 'block';
-            } else if (userType === 'funcionario') {
+            } else if (contaTipo === 'funcionario') {
                 document.getElementById('funcionarioFields').style.display = 'block';
-            } else if (userType === 'adotante') {
+            } else if (contaTipo === 'adotante') {
                 document.getElementById('adotanteFields').style.display = 'block';
             }
         }
@@ -36,7 +38,27 @@
             <input type="date" name="dataDeNascimento">
         
             <label for="">CPF</label>
-            <input type="text" name="cpf">
+            <input type="text" name="cpf" maxlength="11">
+
+            <label for="">CEP</label>
+            <input type="text" name="cep">
+
+            <label for="">Número</label>
+            <input type="text" name="numeroCasa">
+
+            <label for="">Telefone</label>
+            <input type="text" name="telefone" maxlength="11">
+
+            <label for="">Email</label>
+            <input type="text" name="email">
+
+            <label for="">Senha</label>
+            <input type="password" name="senha">
+
+            <label for="">Confirmação de senha</label>
+            <input type="password" name="confirmacaoSenha">
+
+            <input type="submit" value="Cadastrar">
         </div>
 
         <div id="funcionarioFields" style="display:none;">
@@ -47,10 +69,28 @@
             <input type="date" name="dataDeNascimento">
         
             <label for="">CPF</label>
-            <input type="text" name="cpf">
-            
-            <label for="">Cargo</label>
-            <input type="text" name="cargo">
+            <input type="text" name="cpf" maxlength="11">
+
+            <label for="">CEP</label>
+            <input type="text" name="cep">
+
+            <label for="">Número</label>
+            <input type="text" name="numeroCasa">
+
+            <label for="">Telefone</label>
+            <input type="text" name="telefone" maxlength="11">
+
+            <label for="">Email</label>
+            <input type="text" name="email">
+
+            <label for="">Senha</label>
+            <input type="password" name="senha">
+
+            <label for="">Confirmação de senha</label>
+            <input type="password" name="confirmacaoSenha">
+
+            <input type="submit" value="Cadastrar">
+
         </div>
 
         <div id="adotanteFields" style="display:none;">
@@ -61,26 +101,30 @@
             <input type="date" name="dataDeNascimento">
         
             <label for="">CPF</label>
-            <input type="text" name="cpf">
-            
+            <input type="text" name="cpf" maxlength="11">
+
             <label for="">CEP</label>
             <input type="text" name="cep">
 
             <label for="">Número</label>
             <input type="text" name="numeroCasa">
+
+            <label for="">Telefone</label>
+            <input type="text" name="telefone" maxlength="11">
+
+            <label for="">Email</label>
+            <input type="text" name="email">
+
+            <label for="">Senha</label>
+            <input type="password" name="senha">
+
+            <label for="">Confirmação de senha</label>
+            <input type="password" name="confirmacaoSenha">
+
+            <input type="submit" value="Cadastrar">
+
         </div>
-
-        <!-- Campos comuns -->
-        <label for="">Email</label>
-        <input type="text" name="email">
-
-        <label for="">Senha</label>
-        <input type="password" name="senha">
-        
-        <label for="">Confirme a senha</label>
-        <input type="password" name="confirmacaoSenha">
-
-        <input type="submit" name="Enviar">
+   
     </form>
 </body>
 </html>
