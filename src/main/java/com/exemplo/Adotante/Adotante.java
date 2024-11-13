@@ -1,5 +1,11 @@
 package com.exemplo.model;
 
+import java.util.Date;
+
+import com.exemplo.model.Pessoa;
+
+
+
 public class Adotante extends Pessoa {
 
     private int idAdotante;
@@ -10,9 +16,9 @@ public class Adotante extends Pessoa {
         super(); 
     }
 
-    public Adotante(String nome, String nascDate, String genero, String cpf, String endereco, String telefone, 
+    public Adotante(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, 
                     String email, String senha, int idAdotante, String preferenciasDeAdocao, String adocoes) {
-        super(nome, nascDate, genero, cpf, endereco, telefone, email, senha);
+        super(nome, dataDeNascimento, genero, cpf, endereco, telefone, email, senha);
         this.idAdotante = idAdotante;
         this.preferenciasDeAdocao = preferenciasDeAdocao;
         this.adocoes = adocoes;
@@ -47,7 +53,7 @@ public class Adotante extends Pessoa {
     public String toString() {
         return "Adotante [Nome=" + getNome() + ", Data de Nascimento=" + getDataDeNascimento() + 
                ", Gênero=" + getGenero() + ", CPF=" + getCpf() + ", Endereço=" + getEndereco() + 
-               ", Telefone=" + getTelefone() + ", Email=" + getEmail() + ", ID Adotante=" + idAdotante + 
-               ", Preferências de Adoção=" + preferenciasDeAdocao + ", Adoções=" + adocoes + "]";
+               ", Telefone=" + getTelefone() + ", Email=" + getEmail() + ", ID Adotante=" + getIdAdotante() + 
+               ", Preferências de Adoção=" + getPreferenciasDeAdocao() + ", Adoções=" + getAdocoes() + "]";
     }
 }

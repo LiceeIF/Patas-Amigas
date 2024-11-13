@@ -1,13 +1,14 @@
 package com.exemplo.model;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class Pessoa {
     private String nome;
-    private LocalDate dataDeNascimento;
+    private Date dataDeNascimento;
     private String genero;
     private String cpf;
     private String endereco;
@@ -17,9 +18,9 @@ public class Pessoa {
 
     public Pessoa() {}
 
-    public Pessoa(String nome, String dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha) {
+    public Pessoa(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha) {
         this.nome = nome;
-        this.dataDeNascimento = convertDate(dataDeNascimento);
+        this.dataDeNascimento = dataDeNascimento;
         this.genero = genero;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -65,18 +66,19 @@ public class Pessoa {
         return matcher.matches();
     }
 
-    public LocalDate getDataDeNascimento() {
+    public Date getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    private LocalDate convertDate(String nascDate) {
+    public void setDataDeNascimento(String dataDeNascimentoStr) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            return LocalDate.parse(nascDate, formatter);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Data de nascimento inválida. Use o formato dd/MM/yyyy.");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  // or your desired format
+            this.dataDeNascimento = format.parse(dataDeNascimentoStr);
+        } catch (ParseException e) {
+            e.printStackTrace();  
         }
     }
+
 
     public String getGenero() {
         return genero;
@@ -97,7 +99,7 @@ public class Pessoa {
         if (!validarCPF(cpf)) {
             throw new IllegalArgumentException("CPF inválido.");
         }
-        this.cpf = cpf.replaceAll("[.-]", ""); // Remove caracteres especiais
+        this.cpf = cpf.replaceAll("[.-]", ""); 
     }
 
     public String getEndereco() {
@@ -169,15 +171,14 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return "Pessoa {" +
-                "Nome='" + nome + '\'' +
-                ", Data de Nascimento='" + dataDeNascimento.format(formatter) + '\'' +
-                ", Gênero='" + genero + '\'' +
-                ", CPF='" + cpf + '\'' +
-                ", Endereço='" + endereco + '\'' +
-                ", Telefone='" + telefone + '\'' +
-                ", Email='" + email + '\'' +
+                "Nome='" + getNome() + '\'' +
+                ", Data de Nascimento='" +getDataDeNascimento() + '\'' +
+                ", Gênero='" + getGenero() + '\'' +
+                ", CPF='" + getCpf() + '\'' +
+                ", Endereço='" + getEndereco() + '\'' +
+                ", Telefone='" + getTelefone() + '\'' +
+                ", Email='" + getEmail() + '\'' +
                 '}';
     }
 }

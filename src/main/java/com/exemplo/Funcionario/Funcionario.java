@@ -12,7 +12,7 @@ public class Funcionario extends Pessoa {
         super(); 
     }
 
-    public Funcionario(String nome, String dataDeNascimento, String genero, String cpf, String endereco, String telefone, 
+    public Funcionario(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, 
                        String email, String senha, int idFuncionario, Date dataContratacao, String cargo, 
                        float salario, String departamento) {
         super(nome, dataDeNascimento, genero, cpf, endereco, telefone, email, senha);
@@ -68,8 +68,8 @@ public class Funcionario extends Pessoa {
     public String toString() {
         return "Funcionario [Nome=" + getNome() + ", Data de Nascimento=" + getDataDeNascimento() + 
                ", Gênero=" + getGenero() + ", CPF=" + getCpf() + ", Endereço=" + getEndereco() + 
-               ", Telefone=" + getTelefone() + ", Email=" + getEmail() + ", ID Funcionario=" + idFuncionario + 
-               ", Data de Contratação=" + dataContratacao + ", Cargo=" + cargo + ", Salário=" + salario + 
-               ", Departamento=" + departamento + "]";
+               ", Telefone=" + getTelefone() + ", Email=" + getEmail() + ", ID Funcionario=" + getIdFuncionario() + 
+               ", Data de Contratação=" + getDataContratacao() + ", Cargo=" + getCargo() + ", Salário=" + getSalario() + 
+               ", Departamento=" + getDepartamento() + "]";
     }
 }

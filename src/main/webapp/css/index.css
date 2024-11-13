@@ -24,6 +24,23 @@ body {
     height: 100%;
 }
 
+#logo_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: azure;
+    z-index: 4;
+}
+
+#logo_div a{
+    color: antiquewhite;
+    font-size: 1rem;
+    margin: 10px;
+    background-color: black;
+    padding: 1rem;
+    border-radius: 23px;
+}
 
 
 h1 {
