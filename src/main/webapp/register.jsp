@@ -25,6 +25,7 @@
     </script>
 </head>
 <body>
+    <h1>Patas Amigas</h1>
     <form action="register" method="POST">
         <label><input type="radio" name="contaTipo" value="tutor" onclick="toggleFormFields()"> Tutor</label>
         <label><input type="radio" name="contaTipo" value="funcionario" onclick="toggleFormFields()"> Funcionário</label>
@@ -126,5 +127,13 @@
         </div>
    
     </form>
+    <video  class="background-video" autoplay loop muted plays-inline>
+        <source src="/video/Dogs playing outside. GUARANTEED to make you smile. Most watched video. top. let your dog listen(1).mp4" type="video/mp4">
+    </video>
+
+    <script>
+        const video = document.querySelector('.background-video');
+        video.playbackRate = 0.75;
+    </script>
 </body>
 </html>

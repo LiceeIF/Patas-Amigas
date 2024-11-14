@@ -20,17 +20,27 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String lepo = request.getParameter("userType");
-        System.out.println(lepo);
+        String tipoConta = request.getParameter("contaTipo");
+
         String nome = request.getParameter("nome");
         String dataDeNascimento = request.getParameter("dataDeNascimento");
         String cpf = request.getParameter("cpf");
         String cep = request.getParameter("cep");
         String numeroCasa = request.getParameter("numeroCasa");
+        String telefone = request.getParameter("telefone");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         String confirmacaoSenha = request.getParameter("confirmacaoSenha");
-
+        
+        /*switch (tipoConta) {
+            case "tutor":
+                
+                break;
+            case ""
+            default:
+                break;
+        }*/
+        
         
     }
     
