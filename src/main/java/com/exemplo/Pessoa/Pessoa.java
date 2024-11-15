@@ -1,12 +1,18 @@
-package com.exemplo.model;
-import java.text.SimpleDateFormat;
+package com.exemplo.Pessoa;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
-public class Pessoa {
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@Setter
+@Data
+@SuperBuilder
+public abstract   class Pessoa {
     private String nome;
     private Date dataDeNascimento;
     private String genero;
@@ -16,44 +22,6 @@ public class Pessoa {
     private String email;
     private String senha;
 
-    public Pessoa() {}
-
-    public Pessoa(String nome, Date dataDeNascimento, String genero, String cpf, String endereco, String telefone, String email, String senha) {
-        this.nome = nome;
-        this.dataDeNascimento = dataDeNascimento;
-        this.genero = genero;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    private void setNome(String nome) {
-        if (nome == null || nome.isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio.");
-        }
-        this.nome = nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    private void setTelefone(String telefone) {
-        if (telefone == null || telefone.isEmpty()) {
-            throw new IllegalArgumentException("Telefone não pode ser vazio.");
-        }
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     public static boolean isValidEmail(String email) {
         final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -66,51 +34,11 @@ public class Pessoa {
         return matcher.matches();
     }
 
-    public Date getDataDeNascimento() {
-        return dataDeNascimento;
-    }
-
-    public void setDataDeNascimento(String dataDeNascimentoStr) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  // or your desired format
-            this.dataDeNascimento = format.parse(dataDeNascimentoStr);
-        } catch (ParseException e) {
-            e.printStackTrace();  
-        }
-    }
-
-
-    public String getGenero() {
-        return genero;
-    }
-
-    private void setGenero(String genero) {
-        if (genero == null || genero.isEmpty()) {
-            throw new IllegalArgumentException("Gênero não pode ser vazio.");
-        }
-        this.genero = genero;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    private void setCpf(String cpf) {
+    public void setCpf(String cpf) {
         if (!validarCPF(cpf)) {
             throw new IllegalArgumentException("CPF inválido.");
         }
-        this.cpf = cpf.replaceAll("[.-]", ""); 
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    private void setEndereco(String endereco) {
-        if (endereco == null || endereco.isEmpty()) {
-            throw new IllegalArgumentException("Endereço não pode ser vazio.");
-        }
-        this.endereco = endereco;
+        this.cpf = cpf.replaceAll("[.-]", "");
     }
 
     private void setEmail(String email) {
@@ -118,17 +46,6 @@ public class Pessoa {
             throw new IllegalArgumentException("Email inválido.");
         }
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    private void setSenha(String senha) {
-        if (!validarSenha(senha)) {
-            throw new IllegalArgumentException("A senha deve ter pelo menos 12 caracteres e incluir letras maiúsculas, minúsculas, números e caracteres especiais.");
-        }
-        this.senha = senha;
     }
 
     public boolean validarSenha(String senha) {

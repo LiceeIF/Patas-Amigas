@@ -5,135 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patas Amigas</title>
     <link rel="stylesheet" type="text/css" href="css/register.css">
-
-    <script>
-        function toggleFormFields() {
-            var contaTipo = document.querySelector('input[name="contaTipo"]:checked').value;
-            if (!contaTipo) return; 
-            document.getElementById('tutorFields').style.display = 'none';
-            document.getElementById('funcionarioFields').style.display = 'none';
-            document.getElementById('adotanteFields').style.display = 'none';
-
-            if (contaTipo === 'tutor') {
-                document.getElementById('tutorFields').style.display = 'block';
-            } else if (contaTipo === 'funcionario') {
-                document.getElementById('funcionarioFields').style.display = 'block';
-            } else if (contaTipo === 'adotante') {
-                document.getElementById('adotanteFields').style.display = 'block';
-            }
-        }
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
 <body>
-    <h1>Patas Amigas</h1>
-    <form action="register" method="POST">
-        <label><input type="radio" name="contaTipo" value="tutor" onclick="toggleFormFields()"> Tutor</label>
-        <label><input type="radio" name="contaTipo" value="funcionario" onclick="toggleFormFields()"> Funcionário</label>
-        <label><input type="radio" name="contaTipo" value="adotante" onclick="toggleFormFields()"> Adotante</label>
+<h1>Patas Amigas</h1>
+<form action="register" method="POST">
+    <div>
+        <label>
+            <input type="radio" name="contaTipo" value="tutor" onclick="toggleFormFields()" required> Tutor
+        </label>
+        <label>
+            <input type="radio" name="contaTipo" value="funcionario" onclick="toggleFormFields()" required> Funcionário
+        </label>
+        <label>
+            <input type="radio" name="contaTipo" value="adotante" onclick="toggleFormFields()" required> Adotante
+        </label>
 
-        <div id="tutorFields" style="display:none;">
-            <label for="">Nome</label>
-            <input type="text" name="nome">
-            
-            <label for="">Data de Nascimento</label>
-            <input type="date" name="dataDeNascimento">
-        
-            <label for="">CPF</label>
-            <input type="text" name="cpf" maxlength="11">
+    </div>
 
-            <label for="">CEP</label>
-            <input type="text" name="cep">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" required>
 
-            <label for="">Número</label>
-            <input type="text" name="numeroCasa">
+    <label for="dataDeNascimento">Data de Nascimento</label>
+    <input type="date" name="dataDeNascimento" id="dataDeNascimento" required>
 
-            <label for="">Telefone</label>
-            <input type="text" name="telefone" maxlength="11">
+    <label for="cpf">CPF</label>
+    <input placeholder="123.456.789-00" type="text" name="cpf" id="cpf" maxlength="11" required>
 
-            <label for="">Email</label>
-            <input type="text" name="email">
+    <div>
+        <label for="cep">CEP</label>
+        <input placeholder="12345-678" type="text" name="cep" id="cep" required>
 
-            <label for="">Senha</label>
-            <input type="password" name="senha">
+        <label for="numeroCasa">Número</label>
+        <input type="number" name="numeroCasa" id="numeroCasa" required>
+    </div>
 
-            <label for="">Confirmação de senha</label>
-            <input type="password" name="confirmacaoSenha">
+    <label for="telefone">Telefone</label>
+    <input placeholder="(00)00000-0000" type="text" name="telefone" id="telefone" maxlength="11" required>
 
-            <input type="submit" value="Cadastrar">
-        </div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
 
-        <div id="funcionarioFields" style="display:none;">
-            <label for="">Nome</label>
-            <input type="text" name="nome">
-            
-            <label for="">Data de Nascimento</label>
-            <input type="date" name="dataDeNascimento">
-        
-            <label for="">CPF</label>
-            <input type="text" name="cpf" maxlength="11">
+    <label for="senha">Senha</label>
+    <input type="password" name="senha" id="senha" required>
 
-            <label for="">CEP</label>
-            <input type="text" name="cep">
+    <label for="confirmacaoSenha">Confirmação de senha</label>
+    <input type="password" name="confirmacaoSenha" id="confirmacaoSenha" required>
 
-            <label for="">Número</label>
-            <input type="text" name="numeroCasa">
+    <a href="/login">Já tem uma conta? Entre!</a>
+    <input id="sub_button" type="submit" value="Cadastrar">
+</form>
 
-            <label for="">Telefone</label>
-            <input type="text" name="telefone" maxlength="11">
+<video class="background-video" autoplay loop muted playsinline>
+    <source src="/video/Dogs playing outside. GUARANTEED to make you smile. Most watched video. top. let your dog listen(1).mp4" type="video/mp4">
+</video>
 
-            <label for="">Email</label>
-            <input type="text" name="email">
-
-            <label for="">Senha</label>
-            <input type="password" name="senha">
-
-            <label for="">Confirmação de senha</label>
-            <input type="password" name="confirmacaoSenha">
-
-            <input type="submit" value="Cadastrar">
-
-        </div>
-
-        <div id="adotanteFields" style="display:none;">
-            <label for="">Nome</label>
-            <input type="text" name="nome">
-            
-            <label for="">Data de Nascimento</label>
-            <input type="date" name="dataDeNascimento">
-        
-            <label for="">CPF</label>
-            <input type="text" name="cpf" maxlength="11">
-
-            <label for="">CEP</label>
-            <input type="text" name="cep">
-
-            <label for="">Número</label>
-            <input type="text" name="numeroCasa">
-
-            <label for="">Telefone</label>
-            <input type="text" name="telefone" maxlength="11">
-
-            <label for="">Email</label>
-            <input type="text" name="email">
-
-            <label for="">Senha</label>
-            <input type="password" name="senha">
-
-            <label for="">Confirmação de senha</label>
-            <input type="password" name="confirmacaoSenha">
-
-            <input type="submit" value="Cadastrar">
-
-        </div>
-   
-    </form>
-    <video  class="background-video" autoplay loop muted plays-inline>
-        <source src="/video/Dogs playing outside. GUARANTEED to make you smile. Most watched video. top. let your dog listen(1).mp4" type="video/mp4">
-    </video>
-
-    <script>
-        const video = document.querySelector('.background-video');
-        video.playbackRate = 0.75;
-    </script>
+<script>
+    const video = document.querySelector('.background-video');
+    video.playbackRate = 0.75;
+    $("#cpf").mask("000.000.000-00");
+    $("#cep").mask("00000-000");
+    $("#telefone").mask("(00)00000-0000");
+</script>
 </body>
 </html>
