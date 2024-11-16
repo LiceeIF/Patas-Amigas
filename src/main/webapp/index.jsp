@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<html lang="pt-br">
 <head>
     <title>Patas Amigas 🐾</title>
     <link rel="stylesheet" type="text/css" href="../css/index.css">
@@ -51,7 +51,7 @@
             <p style="text-align:center; margin:20px">Bem-vindo ao Patas Amigas! Nosso site conecta pessoas dispostas a adotar um pet a animais em busca de um lar. Aqui, você encontrará cães, gatos e outros animais prontos para serem parte da sua vida. Adote um amigo e transforme a vida de um animalzinho com muito amor e carinho!</p>
             <div>
                 <a href="/login"><b>Login!</b></a>
-                <a href="/register"><b>Cadastrar</b></a>
+                <a href="/tipo_conta"><b>Cadastrar</b></a>
             </div>
             
 

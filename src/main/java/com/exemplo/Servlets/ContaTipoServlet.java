@@ -22,25 +22,21 @@ import javax.servlet.http.HttpSession;
 
 
 
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/tipo_conta")
+public class ContaTipoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        String conta = (String)session.getAttribute("conta");
-        if(conta == null){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/tipo_conta.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/tipo_conta.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
- 
+        String tipoConta = request.getParameter("tipo_conta");  
+
+        HttpSession session = request.getSession();
+        session.setAttribute("conta", tipoConta);  
+        response.sendRedirect("register.jsp");  
     }
 }
 
