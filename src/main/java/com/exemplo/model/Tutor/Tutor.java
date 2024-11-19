@@ -1,12 +1,13 @@
-package com.exemplo.Tutor;
+package com.exemplo.model.Tutor;
 
-import com.exemplo.Pessoa.Pessoa;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
+
+import com.exemplo.model.Pessoa.Pessoa;
 
 @Getter
 @Setter

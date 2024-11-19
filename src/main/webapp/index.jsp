@@ -47,19 +47,17 @@
 
         <div id="logo_div">        
 
-            <img src="" alt="logo">
+            <img src="images/logo amigos felizes.png" height="500px" alt="logo">
             <p style="text-align:center; margin:20px">Bem-vindo ao Patas Amigas! Nosso site conecta pessoas dispostas a adotar um pet a animais em busca de um lar. Aqui, você encontrará cães, gatos e outros animais prontos para serem parte da sua vida. Adote um amigo e transforme a vida de um animalzinho com muito amor e carinho!</p>
             <div>
                 <a href="/login"><b>Login!</b></a>
-                <a href="/tipo_conta"><b>Cadastrar</b></a>
+                <a href="/registrar"><b>Cadastrar</b></a>
             </div>
             
 
         </div>
         
-        <div>
-            lepo
-        </div>
+
         <div class="photos">
             <img src="images/cameleao.jpeg" alt="cameleao">
 

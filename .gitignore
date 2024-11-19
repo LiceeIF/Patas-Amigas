@@ -3,6 +3,7 @@
 Thumbs.db
 
 # Pastas e arquivos gerados pelo Maven
+config.properties
 /target/
 /*.log
 

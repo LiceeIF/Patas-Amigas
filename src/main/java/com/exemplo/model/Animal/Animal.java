@@ -1,4 +1,4 @@
-package com.exemplo.Animal;
+package com.exemplo.model.Animal;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

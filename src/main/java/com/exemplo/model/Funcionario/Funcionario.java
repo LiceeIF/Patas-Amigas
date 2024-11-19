@@ -1,5 +1,4 @@
-package com.exemplo.Funcionario;
-import com.exemplo.Pessoa.Pessoa;
+package com.exemplo.model.Funcionario;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -7,6 +6,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
+
+import com.exemplo.model.Pessoa.Pessoa;
 
 @Getter
 @Setter

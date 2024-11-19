@@ -1,4 +1,4 @@
-package com.exemplo.Pessoa;
+package com.exemplo.model.Pessoa;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,10 +9,10 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-public abstract   class Pessoa {
+public class Pessoa {
     @Getter @Setter private String nome;
     @Getter @Setter private Date dataDeNascimento;
-    @Getter @Setter private String genero;
+    @Getter @Setter private GENERO genero;
     @Getter private String cpf;
     @Getter @Setter private String endereco;
     @Getter @Setter private String telefone;
@@ -56,6 +56,10 @@ public abstract   class Pessoa {
             semUltimosDois += resto[i];
         }
         return resto[0] == (cpf.charAt(9) - '0') && resto[1] == (cpf.charAt(10) - '0');
+    }
+
+    public enum GENERO{
+        Homem,Mulher,NãoBinário,Intersexo;
     }
 }
 

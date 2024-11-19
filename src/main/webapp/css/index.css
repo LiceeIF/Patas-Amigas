@@ -29,7 +29,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: azure;
     z-index: 4;
     max-width: 60%;
 }

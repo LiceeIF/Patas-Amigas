@@ -1,0 +1,29 @@
+package com.exemplo.db;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class ConnectionFactory {
+
+    public static Connection criaConnection() throws SQLException, IOException {
+        Properties props = new Properties();
+
+        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
+            props.load(fis);
+        }
+
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.password");
+
+        if (url == null || user == null || password == null) {
+            throw new SQLException("Falha ao carregar configurações de banco de dados.");
+        }
+
+        return DriverManager.getConnection(url, user, password);
+    }
+}

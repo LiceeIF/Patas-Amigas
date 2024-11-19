@@ -1,8 +1,9 @@
-package com.exemplo.Adotante;
+package com.exemplo.model.Adotante;
 
 
 
-import com.exemplo.Pessoa.Pessoa;
+import com.exemplo.model.Pessoa.Pessoa;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
