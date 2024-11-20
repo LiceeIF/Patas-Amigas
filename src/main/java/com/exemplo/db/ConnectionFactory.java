@@ -20,7 +20,7 @@ public class ConnectionFactory {
         String user = props.getProperty("db.user");
         String password = props.getProperty("db.password");
 
-        if (url == null || user == null || password == null) {
+        if (url == null || user == null ) {
             throw new SQLException("Falha ao carregar configurações de banco de dados.");
         }
 

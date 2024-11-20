@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Adotante extends Pessoa {
 
-    private int idAdotante;
+    private Long idAdotante;
     private String preferenciasDeAdocao;
     private String adocoes;
 

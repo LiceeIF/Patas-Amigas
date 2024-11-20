@@ -2,22 +2,25 @@ package com.exemplo.model.Pessoa;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.exemplo.model.Endereco.Endereco;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+@Getter
 @Data
 @SuperBuilder
 public class Pessoa {
-    @Getter @Setter private String nome;
-    @Getter @Setter private Date dataDeNascimento;
-    @Getter @Setter private GENERO genero;
-    @Getter private String cpf;
-    @Getter @Setter private String endereco;
-    @Getter @Setter private String telefone;
-    @Getter @Setter private String email;
-    @Getter @Setter private String senha;
+    @Setter private String nome;
+    @Setter private Date dataDeNascimento;
+    @Setter private GENERO genero;
+    private String cpf;
+    @Setter private Endereco endereco;
+    @Setter private String telefone;
+    @Setter private String email;
+    @Setter private String senha;
 
     
     public void setCpf(String cpf) {

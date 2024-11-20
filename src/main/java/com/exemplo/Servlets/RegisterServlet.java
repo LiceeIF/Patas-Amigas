@@ -16,9 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.exemplo.model.Adotante.Adotante;
+import com.exemplo.model.Endereco.Endereco;
 import com.exemplo.model.Funcionario.Funcionario;
 import com.exemplo.model.Pessoa.Pessoa;
-
+import com.exemplo.util.BuscaCEP;
 
 
 @WebServlet("/register")
@@ -33,45 +34,73 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("mensagemErro", null);
-        String nome = request.getParameter("nome");
-        String dataDeNascimento = request.getParameter("dataDeNascimento");
-        String cep = request.getParameter("cep");
-        String numeroCasa = request.getParameter("numeroCasa");
+
         String senha = request.getParameter("senha");
         String confirmacaoSenha = request.getParameter("confirmacaoSenha");
+        String cep = request.getParameter("cep");
+        String nome = request.getParameter("nome");
+        String dataDeNascimento = request.getParameter("dataDeNascimento");
+        String numeroCasa = request.getParameter("numeroCasa");
         String genero = request.getParameter("genero");
-        
         String telefone = request.getParameter("telefone");
         String email = request.getParameter("email");
         String cpf = request.getParameter("cpf");
-        
 
-        if (!senha.equals(confirmacaoSenha)){
-            request.setAttribute("mensagemErro", "Senhas não conhecidem");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
-            dispatcher.forward(request, response);
+        if (!senha.equals(confirmacaoSenha)) {
+            redirecionarComErro(request, response, "Senhas não coincidem");
             return;
         }
 
         Pessoa p = Pessoa.builder()
-            .nome(nome)
-            .endereco(cep + " " + numeroCasa)
-            .build();
-        
-        try{
-            p.setCpf(cpf);
+                .nome(nome)
+                .genero(Pessoa.GENERO.valueOf(genero))
+                .telefone(telefone)
+                .build();
+
+        if (!adicionarEndereco(p, cep, numeroCasa, request, response)) {
+            return;
         }
-        catch (IllegalArgumentException e){
-            request.setAttribute("mensagemErro", "CPF inválido");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
-            dispatcher.forward(request, response);
+
+        if (!verificarCPF(p, cpf, request, response)) {
+            return;
         }
+
+        System.out.println(p.toString());
 
         HttpSession session = request.getSession();
 
-
-        //Insert do coiso e session 
-
+        // Aqui você adiciona as operações de salvar ou inserir dados no banco
+        // E configura a sessão, se necessário
     }
+
+    private void redirecionarComErro(HttpServletRequest request, HttpServletResponse response, String mensagemErro) throws ServletException, IOException {
+        request.setAttribute("mensagemErro", mensagemErro);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private boolean adicionarEndereco(Pessoa p, String cep, String numeroCasa, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Endereco endereco = BuscaCEP.buscaEnderecoPelo(cep);
+            endereco.setNumero(Integer.valueOf(numeroCasa));
+            p.setEndereco(endereco);
+
+            return true;
+        } catch (Exception e) {
+            redirecionarComErro(request, response, "CEP inválido");
+            return false;
+        }
+    }
+
+    private boolean verificarCPF(Pessoa p, String cpf, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            p.setCpf(cpf);
+            return true;
+        } catch (IllegalArgumentException e) {
+            redirecionarComErro(request, response, "CPF inválido");
+            return false;
+        }
+    }
+
 }
 

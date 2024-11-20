@@ -20,11 +20,11 @@ public class Animal {
     private String historicoMedico;
     private Date dataDeResgate;
     private String foto;
-    private adocao statusDeAdocao;
+    private ADOCAO statusDeAdocao;
 
-    enum adocao{
-        ADOTADO,
-        EM_PROCESSO,
-        BUSCANDO
+    enum ADOCAO{
+        Adotado,
+        EmProcesso,
+        BuscandoNovoDono;
     }
 }

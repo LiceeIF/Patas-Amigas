@@ -14,7 +14,7 @@ import com.exemplo.model.Pessoa.Pessoa;
 @SuperBuilder
 public class Tutor extends Pessoa {
 
-    private int idTutor;
+    private Long idTutor;
     private int numDeAnimais;  
     private String adocoes;
 

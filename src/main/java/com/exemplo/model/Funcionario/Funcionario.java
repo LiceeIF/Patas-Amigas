@@ -13,7 +13,7 @@ import com.exemplo.model.Pessoa.Pessoa;
 @Setter
 @SuperBuilder
 public class Funcionario extends Pessoa {
-    private int idFuncionario;
+    private Long idFuncionario;
     private Date dataContratacao;
     private String cargo;
     private float salario;
