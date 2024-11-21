@@ -20,6 +20,7 @@ public class Funcionario extends Pessoa {
     private String departamento;
 
 
+
     @Override
     public String toString() {
         return "Funcionario [Nome=" + getNome() + ", Data de Nascimento=" + getDataDeNascimento() + 

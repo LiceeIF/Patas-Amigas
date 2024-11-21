@@ -1,6 +1,7 @@
 package com.exemplo.Servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.exemplo.dao.PessoaDao;
+import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Adotante.Adotante;
 import com.exemplo.model.Endereco.Endereco;
 import com.exemplo.model.Funcionario.Funcionario;
@@ -69,6 +72,12 @@ public class RegisterServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        try {
+            PessoaDao pessoaDao = new PessoaDao( ConnectionFactory.criaConnection(), p);
+            pessoaDao.post();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         // Aqui você adiciona as operações de salvar ou inserir dados no banco
         // E configura a sessão, se necessário
     }

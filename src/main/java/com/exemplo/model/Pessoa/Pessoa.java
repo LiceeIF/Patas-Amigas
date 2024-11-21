@@ -1,7 +1,5 @@
 package com.exemplo.model.Pessoa;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.exemplo.model.Endereco.Endereco;
 import lombok.Data;
@@ -13,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class Pessoa {
+    @Setter private Long id;
     @Setter private String nome;
     @Setter private Date dataDeNascimento;
     @Setter private GENERO genero;
@@ -60,6 +59,8 @@ public class Pessoa {
         }
         return resto[0] == (cpf.charAt(9) - '0') && resto[1] == (cpf.charAt(10) - '0');
     }
+
+
 
     public enum GENERO{
         Homem,Mulher,NãoBinário,Intersexo;
