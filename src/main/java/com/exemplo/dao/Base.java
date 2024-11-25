@@ -1,9 +1,6 @@
 package com.exemplo.dao;
 
 import com.exemplo.db.ConnectionFactory;
-import com.exemplo.model.Animal.Animal;
-import com.exemplo.model.Pessoa.Pessoa;
-import lombok.Builder;
 import lombok.Data;
 
 import java.io.IOException;
@@ -15,31 +12,73 @@ import java.sql.SQLException;
 @Data
 public abstract class Base<T> {
 
-    private Connection connection;
     private T t;
+    private static Connection CONNECTION;
 
-    public Base(Connection connection, T t) {
-        this.connection = connection;
-        this.t = t;
-    }
-
-    public void post() {
-        Field[] fields = t.getClass().getDeclaredFields();
-        try (PreparedStatement statement = connection.prepareStatement(fazerInsert(fields))) {
-            fazerStatements(statement, fields);
-        } catch (SQLException err1) {
-            try {
-                connection.rollback();
-                System.err.println("Erro durante a execução do SQL: " + err1.getMessage());
-            } catch (SQLException err2) {
-                System.err.println("Erro ao fazer rollback: " + err2.getMessage());
-            }
-        } catch (IllegalAccessException e) {
+    static {
+        try {
+            CONNECTION = ConnectionFactory.getConnection();
+            CONNECTION.setAutoCommit(false);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-   public String fazerInsert(Field[] fields) {
+
+
+    public Base( T t) {
+        this.t = t;
+    }
+
+
+    public void post() throws SQLException, IllegalAccessException  {
+        Field[] fields = t.getClass().getDeclaredFields();
+        try (PreparedStatement statement = CONNECTION.prepareStatement(fazerInsert(fields))) {
+            fazerStatements(statement, fields);
+            CONNECTION.commit();
+        } catch (SQLException err1) {
+            CONNECTION.rollback();
+
+            if (err1.getErrorCode() == 1062 || "23000".equals(err1.getSQLState())) {
+                throw new SQLException("CPF ou email já cadastrado.", err1);
+            }
+
+            throw new SQLException("Erro durante a execução do SQL: " + err1.getMessage(), err1);
+        }
+    }
+
+
+    public void delete() throws SQLException {
+        try (PreparedStatement statement = CONNECTION.prepareStatement("DELETE FROM " + t.getClass().getSimpleName() + " WHERE id=?")) {
+            CONNECTION.setAutoCommit(false);
+            Field idField = t.getClass().getDeclaredField("id");
+            idField.setAccessible(true);
+
+            Object idValue = idField.get(t);
+            statement.setObject(1, idValue);
+
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows > 0) {
+                CONNECTION.commit();
+            } else {
+                throw new SQLException("Nada mudou, provavel que ID não exista.");
+            }
+
+        } catch (SQLException err1) {
+            try {
+                CONNECTION.rollback();
+            } catch (SQLException err2) {
+                throw new SQLException(err2);
+            }
+            throw err1;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public String fazerInsert(Field[] fields) {
        StringBuilder sqlQuery = new StringBuilder();
        sqlQuery.append("INSERT INTO ").append(t.getClass().getSimpleName()).append(" (");
 

@@ -9,21 +9,36 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    public static Connection criaConnection() throws SQLException, IOException {
-        Properties props = new Properties();
+    private static final String CONFIG_FILE = "src/main/resources/config.properties";
+    private static final Properties dbProperties;
+    private static Connection connection;
 
-        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
-            props.load(fis);
+    static {
+        try {
+            dbProperties = new Properties();
+            try (FileInputStream fis = new FileInputStream(CONFIG_FILE)) {
+                dbProperties.load(fis);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Falha ao carregar configurações de banco de dados", e);
+        }
+    }
+
+    private ConnectionFactory() {}
+
+    public static Connection getConnection() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            String url = dbProperties.getProperty("db.url");
+            String user = dbProperties.getProperty("db.user");
+            String password = dbProperties.getProperty("db.password");
+
+            if (url == null || user == null) {
+                throw new SQLException("Configurações de banco de dados inválidas.");
+            }
+
+            connection = DriverManager.getConnection(url, user, password);
         }
 
-        String url = props.getProperty("db.url");
-        String user = props.getProperty("db.user");
-        String password = props.getProperty("db.password");
-
-        if (url == null || user == null ) {
-            throw new SQLException("Falha ao carregar configurações de banco de dados.");
-        }
-
-        return DriverManager.getConnection(url, user, password);
+        return connection;
     }
 }

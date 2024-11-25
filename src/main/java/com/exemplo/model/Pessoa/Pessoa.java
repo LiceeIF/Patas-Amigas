@@ -21,6 +21,7 @@ public class Pessoa {
     @Setter private String email;
     @Setter private String senha;
 
+
     
     public void setCpf(String cpf) {
         if (!validarCPF(cpf)) {

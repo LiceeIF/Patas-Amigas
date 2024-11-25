@@ -16,4 +16,12 @@ public class LoginServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+
+    }
+
+
 }

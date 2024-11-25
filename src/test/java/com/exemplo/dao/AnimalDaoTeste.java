@@ -15,8 +15,7 @@ public class AnimalDaoTeste {
 
     @Test
     @DisplayName("Testa o insert da classe animal")
-    public void insertAnimal(){
-        try {
+    public void insertAnimal() throws SQLException, IllegalAccessException  {
             Animal animal = Animal.builder()
                     .nome("Quirino Dog")
                     .idade(5)
@@ -27,12 +26,34 @@ public class AnimalDaoTeste {
                     .sexo("M")
                     .build();
 
-            Connection connection = ConnectionFactory.criaConnection();
-            AnimalDao animalDao = new AnimalDao(connection, animal);
+
+            AnimalDao animalDao = new AnimalDao(animal);
             animalDao.post();
 
-        } catch (SQLException | IOException e) {
-            System.err.println("Error: " + e.getMessage());
+
+    }
+
+    @Test
+    @DisplayName("Testa o delete da classe animal")
+    public void deleteAnimal() throws SQLException {
+        try {
+            Animal animal = Animal.builder()
+                    .nome("Quirino Dog")
+                    .id(12L)
+                    .idade(5)
+                    .especie("Homem Sapos")
+                    .foto("")
+                    .raca("Humano")
+                    .historicoMedico("")
+                    .sexo("M")
+                    .build();
+
+
+            AnimalDao animalDao = new AnimalDao( animal);
+            animalDao.delete();
+
+        } catch (SQLException e) {
+            throw  new SQLException("Error: " + e.getMessage());
         }
     }
 }

@@ -23,6 +23,7 @@ import com.exemplo.model.Endereco.Endereco;
 import com.exemplo.model.Funcionario.Funcionario;
 import com.exemplo.model.Pessoa.Pessoa;
 import com.exemplo.util.BuscaCEP;
+import lombok.SneakyThrows;
 
 
 @WebServlet("/register")
@@ -34,6 +35,7 @@ public class RegisterServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("mensagemErro", null);
@@ -72,14 +74,19 @@ public class RegisterServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+
+        PessoaDao pessoaDao = new PessoaDao(p);
+
         try {
-            PessoaDao pessoaDao = new PessoaDao( ConnectionFactory.criaConnection(), p);
             pessoaDao.post();
+            response.sendRedirect("login.jsp");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            redirecionarComErro(request, response, e.getMessage());
+
         }
-        // Aqui você adiciona as operações de salvar ou inserir dados no banco
-        // E configura a sessão, se necessário
+
+
+
     }
 
     private void redirecionarComErro(HttpServletRequest request, HttpServletResponse response, String mensagemErro) throws ServletException, IOException {
