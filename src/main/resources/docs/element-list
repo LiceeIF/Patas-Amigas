@@ -1,0 +1,11 @@
+com.exemplo.dao
+com.exemplo.db
+com.exemplo.model.Adotante
+com.exemplo.model.Animal
+com.exemplo.model.Endereco
+com.exemplo.model.Funcionario
+com.exemplo.model.Pessoa
+com.exemplo.model.Tutor
+com.exemplo.model.util
+com.exemplo.Servlets
+com.exemplo.util

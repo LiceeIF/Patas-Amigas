@@ -64,7 +64,7 @@ public class Pessoa {
 
 
     public enum GENERO{
-        Homem,Mulher,NãoBinário,Intersexo;
+        Homem,Mulher,NaoBinario,Intersexo;
     }
 }
 

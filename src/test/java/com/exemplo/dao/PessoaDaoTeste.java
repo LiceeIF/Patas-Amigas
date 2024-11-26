@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -15,11 +17,11 @@ public class PessoaDaoTeste {
 
     @Test
     @DisplayName("Testa o insert da classe pessoa")
-    public void insertTest() throws SQLException, IllegalAccessException {
+    public void insertTest() throws SQLException, IllegalAccessException, NoSuchAlgorithmException, InvalidKeySpecException {
         Pessoa p = Pessoa.builder()
-                .nome("Quirinsssso Dog")
+                .nome("Quirinssssssso Dog")
+                .senha("123")
                 .build();
-        p.setCpf("380.029.390-00");
 
         PessoaDao pessoaDAo = new PessoaDao(p);
         pessoaDAo.post();

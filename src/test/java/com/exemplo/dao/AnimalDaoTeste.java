@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -15,7 +17,7 @@ public class AnimalDaoTeste {
 
     @Test
     @DisplayName("Testa o insert da classe animal")
-    public void insertAnimal() throws SQLException, IllegalAccessException  {
+    public void insertAnimal() throws SQLException, IllegalAccessException, NoSuchAlgorithmException, InvalidKeySpecException {
             Animal animal = Animal.builder()
                     .nome("Quirino Dog")
                     .idade(5)
