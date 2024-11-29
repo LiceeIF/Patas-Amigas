@@ -5,24 +5,45 @@ import com.exemplo.model.Endereco.Endereco;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @Data
-@SuperBuilder
+@ToString
 public class Pessoa {
     @Setter private Long id;
     @Setter private String nome;
     @Setter private Date dataDeNascimento;
     @Setter private GENERO genero;
     private String cpf;
-    @Setter private Endereco endereco;
     @Setter private String telefone;
     @Setter private String email;
     @Setter private String senha;
 
+    public Pessoa(){}
+    public Pessoa(Long id,String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.dataDeNascimento = dataDeNascimento;
+        this.genero = genero;
+        setCpf(cpf);
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+    }
 
-    
+    public Pessoa(String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha) {
+        this.nome = nome;
+        this.dataDeNascimento = dataDeNascimento;
+        this.genero = genero;
+        setCpf(cpf);
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+    }
+
+
     public void setCpf(String cpf) {
         if (!validarCPF(cpf)) {
             throw new IllegalArgumentException("CPF inválido.");

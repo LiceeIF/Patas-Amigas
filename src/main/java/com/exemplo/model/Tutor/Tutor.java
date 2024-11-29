@@ -11,10 +11,11 @@ import com.exemplo.model.Pessoa.Pessoa;
 
 @Getter
 @Setter
-@SuperBuilder
-public class Tutor extends Pessoa {
+@Builder
+public class Tutor{
 
-    private Long idTutor;
+    private Long id;
+    private Long idPessoa;
     private int numDeAnimais;  
     private String adocoes;
 

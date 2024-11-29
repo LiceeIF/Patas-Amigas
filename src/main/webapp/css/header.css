@@ -1,0 +1,52 @@
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    margin: 1rem;
+}
+
+header div button {
+    width: 15%;
+    cursor: pointer;
+    font-size: large;
+    position: relative;
+    overflow: hidden;
+    border-color: #f5bd63;
+    border-style: solid;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 15px;
+    transition: color 300ms ease-in-out;
+    color: #333;
+    z-index: 1;
+}
+
+header div button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(180deg, #f278a1, #f5bd63);
+    transition: all 400ms ease-in-out;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    z-index: -1;
+}
+
+header div button:hover::after {
+    transform: scaleY(1);
+    color: #ffffff;
+
+}

@@ -8,7 +8,7 @@ public class PessoaTeste {
     @Test
     @DisplayName("Verificar se a validação de cpf ocorre corretamente")
     public void cpfTeste(){
-        Pessoa p = Pessoa.builder().build();
+        Pessoa p =new Pessoa();
         p.setCpf("946.485.480-43");
         p.setCpf("946485.480-43");
         p.setCpf("94648548043");

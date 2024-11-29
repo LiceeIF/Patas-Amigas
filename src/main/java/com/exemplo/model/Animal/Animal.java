@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Builder
 @Data
 public class Animal {
 
@@ -23,7 +22,9 @@ public class Animal {
     private String foto;
     private ADOCAO statusDeAdocao;
 
-    enum ADOCAO{
+    public Animal(){}
+
+    public enum ADOCAO{
         Adotado,
         EmProcesso,
         BuscandoNovoDono;

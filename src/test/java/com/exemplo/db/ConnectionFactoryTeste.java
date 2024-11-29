@@ -18,7 +18,7 @@ public class ConnectionFactoryTeste {
     @DisplayName("Teste de conexão com o banco de dados")
     void testConexaoBanco() throws SQLException, IOException {
         Connection connection = ConnectionFactory.getConnection();
-        connection.close();
+        ConnectionFactory.closeConnection();
 
     }
 }

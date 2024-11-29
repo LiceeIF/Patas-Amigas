@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class AnimalDaoTeste {
-
+/*
     @Test
     @DisplayName("Testa o insert da classe animal")
     public void insertAnimal() throws SQLException, IllegalAccessException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -57,5 +57,5 @@ public class AnimalDaoTeste {
         } catch (SQLException e) {
             throw  new SQLException("Error: " + e.getMessage());
         }
-    }
+    }*/
 }

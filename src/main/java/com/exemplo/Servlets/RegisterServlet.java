@@ -56,36 +56,33 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        Pessoa p = Pessoa.builder()
-                .nome(nome)
-                .genero(Pessoa.GENERO.valueOf(genero))
-                .telefone(telefone)
-                .build();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dataDeNascimentoDate = sdf.parse(dataDeNascimento);
 
-        if (!adicionarEndereco(p, cep, numeroCasa, request, response)) {
-            return;
-        }
+        try{
+            Pessoa p = new Pessoa(
+                    nome,
+                    dataDeNascimentoDate,
+                    Pessoa.GENERO.valueOf(genero),
+                    cpf,
+                    telefone.replaceAll("\\D", ""),
+                    email,
+                    senha
+            );
 
-        if (!verificarCPF(p, cpf, request, response)) {
-            return;
-        }
+            PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
 
-        System.out.println(p.toString());
-
-        HttpSession session = request.getSession();
-
-
-        PessoaDao pessoaDao = new PessoaDao(p);
-
-        try {
-            pessoaDao.post();
-            response.sendRedirect("login.jsp");
-        } catch (SQLException e) {
-            redirecionarComErro(request, response, e.getMessage());
+            try {
+                pessoaDao.inserir(p);
+                response.sendRedirect("login.jsp");
+            } catch (SQLException e) {
+                redirecionarComErro(request, response, e.getMessage());
+            }
 
         }
-
-
+        catch (IllegalArgumentException err){
+            redirecionarComErro(request, response, "CPF inválido");
+        }
 
     }
 
@@ -94,29 +91,5 @@ public class RegisterServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
         dispatcher.forward(request, response);
     }
-
-    private boolean adicionarEndereco(Pessoa p, String cep, String numeroCasa, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Endereco endereco = BuscaCEP.buscaEnderecoPelo(cep);
-            endereco.setNumero(Integer.valueOf(numeroCasa));
-            p.setEndereco(endereco);
-
-            return true;
-        } catch (Exception e) {
-            redirecionarComErro(request, response, "CEP inválido");
-            return false;
-        }
-    }
-
-    private boolean verificarCPF(Pessoa p, String cpf, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            p.setCpf(cpf);
-            return true;
-        } catch (IllegalArgumentException e) {
-            redirecionarComErro(request, response, "CPF inválido");
-            return false;
-        }
-    }
-
 }
 

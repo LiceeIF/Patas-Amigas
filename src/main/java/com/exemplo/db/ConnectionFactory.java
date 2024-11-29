@@ -12,7 +12,6 @@ public class ConnectionFactory {
     private static final String CONFIG_FILE = "src/main/resources/config.properties";
     private static final Properties dbProperties;
     private static Connection connection;
-
     static {
         try {
             dbProperties = new Properties();
@@ -40,5 +39,14 @@ public class ConnectionFactory {
         }
 
         return connection;
+    }
+
+    public static void  closeConnection() throws SQLException {
+        try {
+            connection.close();
+        }
+        catch (SQLException err){
+            throw new SQLException(err);
+        }
     }
 }

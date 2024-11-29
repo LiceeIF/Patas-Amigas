@@ -8,11 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-@Data
 public class Endereco {
     private String logradouro;
     private String bairro;
     private String localidade;
     private Integer numero;
-
 }
