@@ -1,4 +1,5 @@
 package com.exemplo.model.Pessoa;
+import java.io.InputStream;
 import java.util.Date;
 
 import com.exemplo.model.Endereco.Endereco;
@@ -20,6 +21,7 @@ public class Pessoa {
     @Setter private String telefone;
     @Setter private String email;
     @Setter private String senha;
+    @Setter private InputStream foto;
 
     public Pessoa(){}
     public Pessoa(Long id,String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha) {

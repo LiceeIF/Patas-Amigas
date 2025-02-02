@@ -1,0 +1,43 @@
+body {
+    background-color: #fff5ec;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    height: 85vh;
+}
+
+#main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.infozinhas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infozinhas p {
+    margin: 1rem;
+}
+
+#info {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+#foto_div {
+    width: 50%;
+    height: 100%;
+    background-image: url('data:image/jpeg;base64,${animal.fotoBase64}');
+    background-size: cover;
+    background-position: center;
+}
+
+

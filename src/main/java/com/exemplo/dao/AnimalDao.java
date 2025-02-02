@@ -119,10 +119,10 @@ public class AnimalDao {
                 }
 
                 conn.commit();
-                System.out.println("✅ Animal e relação inseridos com sucesso!");
+                System.out.println("Animal e relação inseridos com sucesso!");
             } catch (SQLException e) {
                 conn.rollback();
-                throw new SQLException("❌ Erro ao inserir o animal e a relação: " + e.getMessage(), e);
+                throw new SQLException(" Erro ao inserir o animal e a relação: " + e.getMessage(), e);
             }
         }
     }

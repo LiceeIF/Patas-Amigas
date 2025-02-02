@@ -1,8 +1,10 @@
 package com.exemplo.Servlets;
 
 import com.exemplo.dao.AnimalDao;
+import com.exemplo.dao.PessoaDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
+import com.exemplo.model.Pessoa.Pessoa;
 import lombok.SneakyThrows;
 
 import javax.servlet.RequestDispatcher;
@@ -21,17 +23,23 @@ public class AnimalPerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
 
+
         String id = request.getParameter("id");
 
-        AnimalDao animalDao = new AnimalDao(ConnectionFactory.getConnection());
+        if( id != null){
+            AnimalDao animalDao = new AnimalDao(ConnectionFactory.getConnection());
+            Animal animal = animalDao.selectById(Long.valueOf(id));
+            request.setAttribute("animal", animal);
 
-        Animal animal = animalDao.selectById(Long.valueOf(id));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/animal.jsp");
+            dispatcher.forward(request, response);
+        }
+        else{
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pesquisa.jsp");
+            dispatcher.forward(request, response);
+        }
 
-        request.setAttribute("animal", animal);
 
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/animal.jsp");
-        dispatcher.forward(request, response);
     }
 
     @Override
