@@ -10,13 +10,22 @@
 <body>
     <div id="main">
 
-        <c:forEach items="${animais}" var="animal">
-            <tr>
-                <td>${animal.nome}</td>
-                <td>${animal.idade}</td>
-                <td>${animal.raca}</td>
-            </tr>
-        </c:forEach>
+        <table>
+            <c:forEach items="${animais}" var="animal">
+                <tr>
+                    <td>${animal.nome}</td>
+                    <td>${animal.raca}</td>
+                    <td>
+                        <c:if test="${not empty animal.fotoByteArray}">
+                            <img src="data:image/jpeg;base64,${animal.fotoBase64}" width="100" height="100" alt="Foto do animal">
+                        </c:if>
+                    </td>
+                </tr>
+            </c:forEach>
+
+
+        </table>
+
 
             <img id="imagem_fofa" src="images/imagem%20home.png" width="1360" alt="logo">
             <div>

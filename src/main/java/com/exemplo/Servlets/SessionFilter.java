@@ -15,22 +15,24 @@ public class SessionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String path = httpRequest.getRequestURI();
         HttpSession session = httpRequest.getSession(false);
 
+        if (path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".jpg") || path.endsWith(".png") || path.endsWith(".gif") || path.endsWith(".mp4")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         if (path.endsWith("/login") || path.endsWith("/register")) {
-            if (session != null && session.getAttribute("usuario") != null) {
+            if (session.getAttribute("usuario") != null) {
                 httpResponse.sendRedirect("/home");
                 return;
             }
             chain.doFilter(request, response);
             return;
         }
-
 
         Object usuario = (session != null) ? session.getAttribute("usuario") : null;
         if (usuario == null) {

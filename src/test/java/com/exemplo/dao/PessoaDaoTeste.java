@@ -50,7 +50,7 @@ public class PessoaDaoTeste {
     public void selectTest() throws SQLException{
 
         PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
-        System.out.println(pessoaDao.select("03529253103"));
+        System.out.println(pessoaDao.selectCpf("03529253103"));
     }
 
 }

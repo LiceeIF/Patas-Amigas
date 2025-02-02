@@ -2,7 +2,6 @@ header {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 1rem;
     background-color: #ffffff;
     width: 100%;
 }
@@ -15,7 +14,11 @@ header div {
     margin: 1rem;
 }
 
-header div button {
+header div a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 15%;
     cursor: pointer;
     font-size: large;
@@ -31,7 +34,7 @@ header div button {
     z-index: 1;
 }
 
-header div button::after {
+header div a::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -45,7 +48,7 @@ header div button::after {
     z-index: -1;
 }
 
-header div button:hover::after {
+header div a:hover::after {
     transform: scaleY(1);
     color: #ffffff;
 

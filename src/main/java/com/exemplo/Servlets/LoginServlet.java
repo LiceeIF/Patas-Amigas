@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         try{
             PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
 
-            Pessoa p = pessoaDao.select(
+            Pessoa p = pessoaDao.selectLogin(
                     email,
                     senha
             );

@@ -64,7 +64,7 @@ public class PessoaDao {
         }
     }
 
-    public Pessoa select(Long id) throws SQLException {
+    public Pessoa selectById(Long id) throws SQLException {
         String sql = "SELECT * FROM Pessoa WHERE id = ?";
 
         Pessoa pessoa = null;
@@ -100,7 +100,42 @@ public class PessoaDao {
         return pessoa;
     }
 
-    public Pessoa select(String cpf) throws SQLException {
+    public Pessoa selectByName(String nome) throws SQLException {
+        String sql = "SELECT * FROM Pessoa WHERE nome = ?";
+
+        Pessoa pessoa = null;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    pessoa = new Pessoa(
+                            rs.getString("nome"),
+                            rs.getDate("dataDeNascimento"),
+                            Pessoa.GENERO.valueOf(rs.getString("genero")),
+                            rs.getString("cpf"),
+                            rs.getString("telefone"),
+                            rs.getString("email"),
+                            rs.getString("senha")
+                    );
+                } else {
+                    throw new SQLException("Pessoa não encontrada .");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            ConnectionFactory.closeConnection();
+        }
+
+        return pessoa;
+    }
+
+    public Pessoa selectCpf(String cpf) throws SQLException {
         String sql = "SELECT * FROM Pessoa WHERE cpf = ?";
 
         Pessoa pessoa = null;
@@ -135,7 +170,7 @@ public class PessoaDao {
         return pessoa;
     }
 
-    public Pessoa select(String email, String senha) throws SQLException {
+    public Pessoa selectLogin(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM Pessoa WHERE email = ? and senha =?";
 
         Pessoa pessoa = null;
@@ -150,6 +185,7 @@ public class PessoaDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     pessoa = new Pessoa(
+                            rs.getLong("id"),
                             rs.getString("nome"),
                             rs.getDate("dataDeNascimento"),
                             Pessoa.GENERO.valueOf(rs.getString("genero")),

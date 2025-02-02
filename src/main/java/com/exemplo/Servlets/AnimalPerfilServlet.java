@@ -1,6 +1,5 @@
 package com.exemplo.Servlets;
 
-
 import com.exemplo.dao.AnimalDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
@@ -15,22 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/animal")
+public class AnimalPerfilServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
+
+        String id = request.getParameter("id");
+
         AnimalDao animalDao = new AnimalDao(ConnectionFactory.getConnection());
 
-        List<Animal> animais = animalDao.select();
-        if (animais == null) {
-            System.out.println("lepo");
-        }
-        request.setAttribute("animais", animais);
+        Animal animal = animalDao.selectById(Long.valueOf(id));
+
+        request.setAttribute("animal", animal);
 
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/animal.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -38,6 +38,5 @@ public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
     }
-
 
 }

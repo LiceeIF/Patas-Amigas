@@ -1,0 +1,23 @@
+#form_doar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+body {
+    background-color: #fff5ec;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    height: 85vh;
+
+}
+
+#main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

@@ -16,10 +16,10 @@
         <img src="images/logo.png" height="80px" alt="logo">
 
         <div>
-            <button>Procure seu amigo!</button>
-            <button>Apoie a causa</button>
-            <button>Doe um amiguinho!</button>
-            <button>Colaboração</button>
+            <a>Procure seu amigo!</a>
+            <a>Apoie a causa</a>
+            <a href="doar">Doe um amiguinho!</a>
+            <a>Colaboração</a>
         </div>
 
     </header>

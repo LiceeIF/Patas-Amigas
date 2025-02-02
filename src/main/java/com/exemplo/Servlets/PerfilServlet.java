@@ -1,9 +1,10 @@
 package com.exemplo.Servlets;
 
-
 import com.exemplo.dao.AnimalDao;
+import com.exemplo.dao.PessoaDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
+import com.exemplo.model.Pessoa.Pessoa;
 import lombok.SneakyThrows;
 
 import javax.servlet.RequestDispatcher;
@@ -13,24 +14,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/perfil")
+public class PerfilServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
-        AnimalDao animalDao = new AnimalDao(ConnectionFactory.getConnection());
 
-        List<Animal> animais = animalDao.select();
-        if (animais == null) {
-            System.out.println("lepo");
+        request.setAttribute("perfil", null);
+
+        String nome = request.getParameter("nome");
+        System.out.println();
+        if( nome != null){
+            PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
+            Pessoa pessoa = pessoaDao.selectByName(nome);
+            request.setAttribute("perfil", pessoa);
         }
-        request.setAttribute("animais", animais);
+        else{
+            request.setAttribute("perfil",
+                    request.getSession().getAttribute("usuario"));
+        }
 
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/perfil.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -38,6 +44,5 @@ public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
     }
-
 
 }
