@@ -9,25 +9,7 @@
 </head>
 <body>
     <div id="main">
-
-        <table>
-            <c:forEach items="${animais}" var="animal">
-                <tr>
-                    <td>${animal.nome}</td>
-                    <td>${animal.raca}</td>
-                    <td>
-                        <c:if test="${not empty animal.fotoByteArray}">
-                            <img src="data:image/jpeg;base64,${animal.fotoBase64}" width="100" height="100" alt="Foto do animal">
-                        </c:if>
-                    </td>
-                </tr>
-            </c:forEach>
-
-
-        </table>
-
-
-            <img id="imagem_fofa" src="images/imagem%20home.png" width="1360" alt="logo">
+        <img id="imagem_fofa" src="images/imagem%20home.png" width="1360" alt="logo">
             <div>
                 <p>
                     Está procurando amigos para acompanhar seus dias e não sabe como? Olhe as rede com novos companheiros, encontre lojas para acessórios e adote um novo amigo.
@@ -37,6 +19,17 @@
 
         <div>
             Animais <a href="">ver mais...</a>
+            <div>
+                <c:forEach items="${animais}" var="animal">
+                    <c:if test="${not empty animal.fotoBase64}">
+                        <div class="botoes_menu">
+                            <a href="animal?id=${animal.id}" >
+                                <img src="data:image/jpeg;base64,${animal.fotoBase64}" width="210" height="210" alt="Foto do animal">
+                            </a>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
         </div>
         <div>
             Adotantes <a href="">ver mais...</a>

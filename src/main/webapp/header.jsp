@@ -17,9 +17,9 @@
 
         <div>
             <a>Procure seu amigo!</a>
-            <a>Apoie a causa</a>
+            <a href="home">Home Page</a>
             <a href="doar">Doe um amiguinho!</a>
-            <a>Colaboração</a>
+            <a href="perfil">Perfil</a>
         </div>
 
     </header>

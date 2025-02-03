@@ -38,6 +38,18 @@ public class Animal {
         this.dataDeNascimento = dataDeNascimento;
     }
 
+    private byte[] fotoByteArray;
+
+    public byte[] getFotoByteArray() throws IOException {
+        if (fotoByteArray == null && foto != null) {
+            fotoByteArray = foto.readAllBytes();
+        }
+        return fotoByteArray;
+    }
+    public String getFotoBase64() throws IOException {
+        return Base64.getEncoder().encodeToString(getFotoByteArray());
+    }
+
 
     public enum ADOCAO{
         Adotado,

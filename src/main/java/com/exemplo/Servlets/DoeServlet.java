@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet("/doar")
-@MultipartConfig(maxFileSize = 16177215)
+@MultipartConfig(maxFileSize = 52428800)
 public class DoeServlet extends HttpServlet {
 
     @Override

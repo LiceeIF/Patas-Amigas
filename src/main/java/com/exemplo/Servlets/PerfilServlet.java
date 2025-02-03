@@ -2,6 +2,7 @@ package com.exemplo.Servlets;
 
 import com.exemplo.dao.AnimalDao;
 import com.exemplo.dao.PessoaDao;
+import com.exemplo.dao.SolicitacaoDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
 import com.exemplo.model.Pessoa.Pessoa;
@@ -21,19 +22,22 @@ public class PerfilServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
-
         request.setAttribute("perfil", null);
+        request.setAttribute("solicitacoes", null);
 
         String nome = request.getParameter("nome");
-        System.out.println();
+        SolicitacaoDao solicitacaoDao = new SolicitacaoDao(ConnectionFactory.getConnection());
+
         if( nome != null){
             PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
             Pessoa pessoa = pessoaDao.selectByName(nome);
             request.setAttribute("perfil", pessoa);
+            request.setAttribute("solicitacoes", solicitacaoDao.selectSolicitacoesByPessoaId(pessoa));
         }
         else{
-            request.setAttribute("perfil",
-                    request.getSession().getAttribute("usuario"));
+            Pessoa pessoa = (Pessoa) request.getSession().getAttribute("usuario");
+            request.setAttribute("perfil", pessoa);
+            request.setAttribute("solicitacoes", solicitacaoDao.selectSolicitacoesByPessoaId(pessoa));
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/perfil.jsp");

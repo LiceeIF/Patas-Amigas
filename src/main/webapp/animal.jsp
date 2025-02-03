@@ -55,7 +55,10 @@
                 Data de resgate: <p>${animal.dataDeResgate}</p>
             </div>
             <c:if test="${animal.statusDeAdocao == 'BuscandoNovoDono'}">
-                <button>Solicitar adotação</button>
+                <form method="POST" action="animal">
+                    <input type="submit">
+                </form>
+
             </c:if>
 
         </div>

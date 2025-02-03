@@ -18,8 +18,7 @@ public class PessoaDao {
     public void inserir(Pessoa pessoa) throws SQLException {
         String sql = "INSERT INTO Pessoa (nome, email, senha, dataDeNascimento, cpf, telefone, genero) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getEmail());
@@ -38,15 +37,14 @@ public class PessoaDao {
             throw new SQLException(e);
         }
         finally {
-            ConnectionFactory.closeConnection();
+            connection.close();
         }
     }
 
     public void delete(Long id) throws SQLException {
         String sql = "DELETE FROM Pessoa WHERE id = ?";
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setLong(1, id);
 
@@ -60,7 +58,7 @@ public class PessoaDao {
             e.printStackTrace();
         }
         finally {
-            ConnectionFactory.closeConnection();
+            connection.close();
         }
     }
 
@@ -69,8 +67,7 @@ public class PessoaDao {
 
         Pessoa pessoa = null;
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, String.valueOf(id));
 
@@ -94,7 +91,7 @@ public class PessoaDao {
             e.printStackTrace();
             throw e;
         } finally {
-            ConnectionFactory.closeConnection();
+            connection.close();
         }
 
         return pessoa;
@@ -105,8 +102,7 @@ public class PessoaDao {
 
         Pessoa pessoa = null;
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, nome);
 
@@ -175,8 +171,7 @@ public class PessoaDao {
 
         Pessoa pessoa = null;
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, email);
             stmt.setString(2, senha);
@@ -195,7 +190,7 @@ public class PessoaDao {
                             rs.getString("senha")
                     );
                 } else {
-                    throw new SQLException("Pessoa não encontrada .");
+                    throw new IllegalArgumentException("Pessoa não encontrada.");
                 }
             }
         } catch (SQLException e) {

@@ -20,5 +20,10 @@
     <h4>
         ${perfil.cpf}
     </h4>
+    <c:forEach items="${solicitacoes}" var="solicitacao">
+        <p>${solicitacao.id}</p>
+        <p>${solicitacao.idDono}</p>
+    </c:forEach>
+
 </body>
 </html>

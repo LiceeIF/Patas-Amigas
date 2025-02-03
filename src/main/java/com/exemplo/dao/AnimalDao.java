@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalDao {
-    private Connection connection;
+    private final Connection connection;
 
     public AnimalDao(Connection connection) {
         this.connection = connection;
@@ -21,7 +21,7 @@ public class AnimalDao {
         String sql = "SELECT * FROM Animal LIMIT 10";
         List<Animal> animais = new ArrayList<>();
 
-        try (PreparedStatement stmt = this.connection.prepareStatement(sql);
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -45,6 +45,9 @@ public class AnimalDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            connection.close();
+        }
 
         return animais;
     }
@@ -54,7 +57,7 @@ public class AnimalDao {
         String sql = "SELECT * FROM Animal WHERE id = ?";
         Animal animal = null;
 
-        try (PreparedStatement stmt = this.connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {  // Usando apenas 'connection'
             stmt.setLong(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -78,6 +81,9 @@ public class AnimalDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            connection.close();
+        }
 
         return animal;
     }
@@ -86,10 +92,10 @@ public class AnimalDao {
         String sqlAnimal = "INSERT INTO Animal (nome, especie, raca, data_de_nascimento, data_de_resgate, foto, sexo, historico_medico) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         String sqlRelacao = "INSERT INTO Relacao (id_animal, id_usuario, relacao) VALUES (?, ?, ?);";
 
-        try (Connection conn = ConnectionFactory.getConnection()) {
-            conn.setAutoCommit(false);
+        try {
+            connection.setAutoCommit(false);
 
-            try (PreparedStatement stmtAnimal = conn.prepareStatement(sqlAnimal, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement stmtAnimal = connection.prepareStatement(sqlAnimal, Statement.RETURN_GENERATED_KEYS)) {
                 stmtAnimal.setString(1, animal.getNome());
                 stmtAnimal.setString(2, animal.getEspecie());
                 stmtAnimal.setString(3, animal.getRaca());
@@ -107,7 +113,7 @@ public class AnimalDao {
                             int idAnimal = generatedKeys.getInt(1);
 
                             if (idTutor != null) {
-                                try (PreparedStatement stmtRelacao = conn.prepareStatement(sqlRelacao)) {
+                                try (PreparedStatement stmtRelacao = connection.prepareStatement(sqlRelacao)) {
                                     stmtRelacao.setInt(1, idAnimal);
                                     stmtRelacao.setInt(2, Math.toIntExact(idTutor));
                                     stmtRelacao.setString(3, "Tutor");
@@ -118,13 +124,18 @@ public class AnimalDao {
                     }
                 }
 
-                conn.commit();
+                connection.commit();
                 System.out.println("Animal e relação inseridos com sucesso!");
             } catch (SQLException e) {
-                conn.rollback();
-                throw new SQLException(" Erro ao inserir o animal e a relação: " + e.getMessage(), e);
+                connection.rollback();
+                throw new SQLException("Erro ao inserir o animal e a relação: " + e.getMessage(), e);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Erro ao inserir o animal", e);
+        } finally {
+            connection.setAutoCommit(true);
+            connection.close();
         }
     }
-
 }

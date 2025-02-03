@@ -28,22 +28,23 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
 
-        try{
+        try {
             PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
-
-            Pessoa p = pessoaDao.selectLogin(
-                    email,
-                    senha
-            );
+            Pessoa p = pessoaDao.selectLogin(email, senha);
             HttpSession session = request.getSession();
             session.setAttribute("usuario", p);
             response.sendRedirect("/home");
 
+        } catch (IllegalArgumentException err) {
+            redirecionarComErro(request, response, err.getMessage());
         }
-        catch (IllegalArgumentException err){
-            throw new IllegalArgumentException(err);
-        }
-
     }
+
+    private void redirecionarComErro(HttpServletRequest request, HttpServletResponse response, String mensagemErro) throws ServletException, IOException {
+        request.setAttribute("mensagemErro", mensagemErro);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+        dispatcher.forward(request, response);
+    }
+
 
 }

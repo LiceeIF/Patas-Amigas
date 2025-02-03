@@ -20,12 +20,17 @@ public class SessionFilter implements Filter {
         String path = httpRequest.getRequestURI();
         HttpSession session = httpRequest.getSession(false);
 
+        if(session == null){
+            chain.doFilter(request, response);
+            return;
+        }
+
         if (path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".jpg") || path.endsWith(".png") || path.endsWith(".gif") || path.endsWith(".mp4")) {
             chain.doFilter(request, response);
             return;
         }
 
-        if (path.endsWith("/login") || path.endsWith("/register")) {
+        if (path.endsWith("/login") || path.endsWith("/register") || path.endsWith("/")) {
             if (session.getAttribute("usuario") != null) {
                 httpResponse.sendRedirect("/home");
                 return;

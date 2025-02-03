@@ -18,6 +18,11 @@
     <input type="password" name="senha" id="senha" required>
 
     <a href="/register">Não tem uma conta? Crie!</a>
+    <c:if test="${not empty mensagemErro}">
+        <div class="erro-mensagem">
+            <c:out value="${mensagemErro}"/>
+        </div>
+    </c:if>
     <input id="sub_button" type="submit" value="Entrar">
 </form>
 
