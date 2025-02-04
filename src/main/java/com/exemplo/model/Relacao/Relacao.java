@@ -1,5 +1,7 @@
 package com.exemplo.model.Relacao;
 
+import com.exemplo.model.Animal.Animal;
+import com.exemplo.model.Pessoa.Pessoa;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,14 +10,14 @@ import lombok.Setter;
 public class Relacao {
 
     private Long id;
-    private Long idAnimal;
-    private Long idUsuario;
+    private Animal animal;
+    private Pessoa usuario;
     private String relacao;
 
-    public Relacao(Long id, Long idAnimal, Long idUsuario, String relacao) {
+    public Relacao(Long id, Animal animal, Pessoa usuario, String relacao) {
         this.id = id;
-        this.idAnimal = idAnimal;
-        this.idUsuario = idUsuario;
+        this.animal = animal;
+        this.usuario = usuario;
         this.relacao = relacao;
     }
 }

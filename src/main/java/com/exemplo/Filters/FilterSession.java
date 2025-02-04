@@ -1,4 +1,4 @@
-package com.exemplo.Servlets;
+package com.exemplo.Filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/*"})
-public class SessionFilter implements Filter {
+public class FilterSession implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}

@@ -56,7 +56,7 @@
             </div>
             <c:if test="${animal.statusDeAdocao == 'BuscandoNovoDono'}">
                 <form method="POST" action="animal">
-                    <input type="submit">
+                    <input type="submit" value="Solicitar adoção">
                 </form>
 
             </c:if>

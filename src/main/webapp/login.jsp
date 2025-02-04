@@ -9,13 +9,14 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
-<h1>Patas Amigas</h1>
 <form action="login" method="POST">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
+    <img src="images/logo amigos felizes.png" height="500px" alt="logo">
 
-    <label for="senha">Senha</label>
-    <input type="password" name="senha" id="senha" required>
+    <label for="email"><b>Email:</b></label>
+    <input type="email" placeholder="john.doe@email.com" name="email" id="email" required>
+
+    <label for="senha"><b>Senha:</b></label>
+    <input type="password" placeholder="anima$F0fos" name="senha" id="senha" required>
 
     <a href="/register">Não tem uma conta? Crie!</a>
     <c:if test="${not empty mensagemErro}">

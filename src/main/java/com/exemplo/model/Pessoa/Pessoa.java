@@ -1,17 +1,15 @@
 package com.exemplo.model.Pessoa;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.Date;
 
 import com.exemplo.model.Endereco.Endereco;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Getter
-@Data
-@ToString
+
 public class Pessoa {
     @Setter private Long id;
     @Setter private String nome;
@@ -22,17 +20,50 @@ public class Pessoa {
     @Setter private String email;
     @Setter private String senha;
     @Setter private InputStream foto;
+    @Setter private Boolean adm;
+    @Setter private Boolean tutor;
+    @Setter private Boolean adotante;
+    @Setter private Boolean funcionario;
+
+    private byte[] fotoByteArray;
+
+    public Pessoa(long id) {
+        this.id = id;
+    }
+
+    public byte[] getFotoByteArray() throws IOException {
+        if (fotoByteArray == null && foto != null) {
+            fotoByteArray = foto.readAllBytes();
+        }
+        return fotoByteArray;
+    }
+    public String getFotoBase64() throws IOException {
+        return Base64.getEncoder().encodeToString(getFotoByteArray());
+    }
 
     public Pessoa(){}
-    public Pessoa(Long id,String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha) {
+
+    public Pessoa(Long id, String nome, String telefone, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public Pessoa(Long id, String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha, InputStream foto, Boolean adm, Boolean tutor, Boolean adotante, Boolean funcionario) {
         this.id = id;
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
         this.genero = genero;
-        setCpf(cpf);
+        this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
+        this.foto = foto;
+        this.adm = adm;
+        this.tutor = tutor;
+        this.adotante = adotante;
+        this.funcionario = funcionario;
     }
 
     public Pessoa(String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha) {

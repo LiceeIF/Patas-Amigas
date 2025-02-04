@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/register.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    
+
 </head>
 <body>
     <style>
@@ -19,10 +19,10 @@
             align-items: center;
             justify-content: center;
         }
-        
+
     </style>
-    <img src="images/logo amigos felizes.png" height="200px" alt="logo" >
     <form action="register" method="POST">
+        <img src="images/logo amigos felizes.png" height="200px" alt="logo">
 
             <label for="nome">Nome</label>
             <input class="text_label" type="text" name="nome" id="nome" required>
@@ -42,14 +42,14 @@
                 <option value="Não Binário">NãoBinário</option>
                 <option value="Intersexo">Intersexo</option>
             </select>
-            
-            
+
+
 
             <label for="telefone">Telefone</label>
             <input class="text_label" placeholder="(00)00000-0000" type="text" name="telefone" id="telefone" maxlength="11" required>
 
 
-      
+
             <label for="cep">CEP</label>
             <input class="text_label" placeholder="12345-678" type="text" name="cep" id="cep" required>
 
@@ -65,14 +65,14 @@
             <label for="confirmacaoSenha">Confirmação de senha</label>
             <input class="text_label" type="password" name="confirmacaoSenha" id="confirmacaoSenha" required>
 
-        
+
         <a href="/login">Já tem uma conta? Entre!</a>
         <c:if test="${not empty mensagemErro}">
             <div class="erro-mensagem">
                 <c:out value="${mensagemErro}"/>
             </div>
         </c:if>
-        
+
         <input id="next_button" type="submit" value="Cadastrar">
     </form>
 

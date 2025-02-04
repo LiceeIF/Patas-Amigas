@@ -53,7 +53,7 @@
             </div>
 
             <div>
-                <input id="mandar" type="submit">
+                <input id="mandar" type="submit" value="Doar!">
 
             </div>
         </form>

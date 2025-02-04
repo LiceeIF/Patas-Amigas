@@ -26,6 +26,15 @@ public class Animal {
 
     public Animal(){}
 
+    public Animal(Long id, String nome, String especie, String raca, String sexo, InputStream foto) {
+        this.id = id;
+        this.nome = nome;
+        this.especie = especie;
+        this.raca = raca;
+        this.sexo = sexo;
+        this.foto = foto;
+    }
+
     public Animal(String nome, String especie, String raca, ADOCAO statusDeAdocao, InputStream foto, Date dataDeResgate, String historicoMedico, String sexo, Date dataDeNascimento) {
         this.nome = nome;
         this.especie = especie;

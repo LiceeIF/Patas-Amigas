@@ -1,5 +1,7 @@
 package com.exemplo.model.Solicitacao;
 
+import com.exemplo.model.Animal.Animal;
+import com.exemplo.model.Pessoa.Pessoa;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,15 +10,15 @@ import lombok.Setter;
 public class Solicitacao {
 
     private Long id;
-    private Long idAnimal;
-    private Long idDono;
-    private Long idSolicitador;
+    private Animal animal;
+    private Pessoa dono;
+    private Pessoa solicitador;
     private Boolean aceito;
 
-    public Solicitacao(Long idAnimal, Long idDono, Long idSolicitador, Boolean aceito) {
-        this.idAnimal = idAnimal;
-        this.idDono = idDono;
-        this.idSolicitador = idSolicitador;
+    public Solicitacao(Animal animal, Pessoa dono, Pessoa solicitador, Boolean aceito) {
+        this.animal = animal;
+        this.dono = dono;
+        this.solicitador = solicitador;
         this.aceito = aceito;
     }
 }

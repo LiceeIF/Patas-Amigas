@@ -56,10 +56,13 @@ public class AnimalPerfilServlet extends HttpServlet {
             RelacaoDao relacaoDao = new RelacaoDao(ConnectionFactory.getConnection());
             Relacao relacao = relacaoDao.selectByAnimalId(animal);
 
+            PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
+            Pessoa pessoa = pessoaDao.selectById(relacao.getUsuario().getId());
+
             Solicitacao solicitacao = new Solicitacao(
-                    animal.getId(),
-                    relacao.getIdUsuario(),
-                    usuario.getId(),
+                    animal,
+                    pessoa,
+                    usuario,
                     Boolean.FALSE
             );
 

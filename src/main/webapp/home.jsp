@@ -14,12 +14,11 @@
                 <p>
                     Está procurando amigos para acompanhar seus dias e não sabe como? Olhe as rede com novos companheiros, encontre lojas para acessórios e adote um novo amigo.
                 </p>
-                <button>Sobre nós</button>
             </div>
 
         <div>
-            Animais <a href="">ver mais...</a>
-            <div>
+            <b>Animais: </b> <a href="">ver mais...</a>
+            <div style="border-bottom: 4px solid rgba(242,120,161,0.44); margin-bottom: 2rem; border-radius: 7px">
                 <c:forEach items="${animais}" var="animal">
                     <c:if test="${not empty animal.fotoBase64}">
                         <div class="botoes_menu">
