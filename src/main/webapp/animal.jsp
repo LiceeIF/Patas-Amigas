@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>${animal.nome}</title>
+    <title>Patas Amigas 🐾</title>
     <link rel="stylesheet" type="text/css" href="../css/animal.css">
 
 </head>

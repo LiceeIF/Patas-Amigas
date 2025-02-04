@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Perfil</title>
+    <title>Patas Amigas 🐾</title>
     <link rel="stylesheet" type="text/css" href="../css/perfil.css">
 </head>
 <body>
@@ -37,7 +37,10 @@
     <div id="tags_div">
         <c:if test="${perfil.funcionario}">
             <div class="tags">
-                <p >Funcionário</p>
+                <form action="/funcionario" method="POST">
+                    <input type="submit" value="Funcionário">
+                </form>
+
             </div>
         </c:if>
         <c:if test="${perfil.adotante}">

@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Solicitações</title>
+    <title>Patas Amigas 🐾</title>
     <link rel="stylesheet" type="text/css" href="../css/tutor.css">
 </head>
 <body>
