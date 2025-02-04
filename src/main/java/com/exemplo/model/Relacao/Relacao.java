@@ -14,8 +14,17 @@ public class Relacao {
     private Pessoa usuario;
     private String relacao;
 
+    public Relacao() {
+    }
+
     public Relacao(Long id, Animal animal, Pessoa usuario, String relacao) {
         this.id = id;
+        this.animal = animal;
+        this.usuario = usuario;
+        this.relacao = relacao;
+    }
+
+    public Relacao(Animal animal, Pessoa usuario, String relacao) {
         this.animal = animal;
         this.usuario = usuario;
         this.relacao = relacao;

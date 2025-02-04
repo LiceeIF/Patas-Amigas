@@ -30,8 +30,6 @@ public class PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
-        } finally {
-            connection.close();
         }
     }
 
@@ -56,9 +54,7 @@ public class PessoaDao {
             e.printStackTrace();
             throw new SQLException(e);
         }
-        finally {
-            connection.close();
-        }
+
     }
 
     public void delete(Long id) throws SQLException {
@@ -77,9 +73,7 @@ public class PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.close();
-        }
+
     }
 
     public Pessoa selectById(Long id) throws SQLException {
@@ -115,8 +109,6 @@ public class PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
-        } finally {
-            connection.close();
         }
 
         return pessoa;
@@ -149,8 +141,6 @@ public class PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
-        } finally {
-            connection.close();
         }
 
         return pessoa;
@@ -184,8 +174,6 @@ public class PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
-        } finally {
-            connection.close();
         }
 
         return pessoa;
@@ -225,13 +213,9 @@ public class PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
-        } finally {
-            connection.close();
         }
 
         return pessoa;
     }
-
-
 
 }

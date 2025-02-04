@@ -17,9 +17,9 @@ public class DtoDao {
         this.connection = connection;
     }
 
-    public List<DtoGenerico> racasAnimais() throws SQLException {
+    public List<DtoGenerico> especieAnimais() throws SQLException {
         List<DtoGenerico> resultados = new ArrayList<>();
-        String sql = "SELECT raca, COUNT(*) AS quantidade FROM Animal GROUP BY raca ORDER BY quantidade DESC";
+        String sql = "SELECT especie, COUNT(*) AS quantidade FROM Animal GROUP BY especie ORDER BY quantidade DESC";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -28,7 +28,7 @@ public class DtoDao {
                 resultados.add(
                         DtoGenerico.builder()
                         .quantidade(rs.getInt("quantidade"))
-                        .tipo(rs.getString("raca"))
+                        .tipo(rs.getString("especie"))
                         .build()
                 );
             }
@@ -37,6 +37,30 @@ public class DtoDao {
         }
         return resultados;
     }
+
+    public List<DtoGenerico> quantidadeRaca(String especie) throws SQLException {
+        List<DtoGenerico> resultados = new ArrayList<>();
+        String sql = "SELECT raca, COUNT(*) AS quantidade FROM Animal WHERE especie = ? GROUP BY raca ORDER BY quantidade DESC";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, especie);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    resultados.add(
+                            DtoGenerico.builder()
+                                    .quantidade(rs.getInt("quantidade"))
+                                    .tipo(rs.getString("raca"))
+                                    .build()
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultados;
+    }
+
 
     public List<DtoGenerico> tiposUsuarios() throws SQLException {
         List<DtoGenerico> resultados = new ArrayList<>();

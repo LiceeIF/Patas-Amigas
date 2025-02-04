@@ -7,9 +7,20 @@ body {
 }
 
 #main{
+    padding-top: 2rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
+}
+
+.solicitacao_div{
+    background-color: #ffe8bd;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #f5bd63;
+    border-radius: 15px;
+    margin: 1rem;
+    padding: 0.5rem;
 }

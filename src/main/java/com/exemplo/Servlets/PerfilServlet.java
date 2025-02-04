@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 @WebServlet("/perfil")
@@ -24,32 +25,39 @@ public class PerfilServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
-        request.setAttribute("perfil", null);
-        request.setAttribute("solicitacoes", null);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        Connection connection = null;
+        try {
+            request.setAttribute("perfil", null);
+            request.setAttribute("solicitacoes", null);
 
-        String id = request.getParameter("id");
+            String id = request.getParameter("id");
+            Pessoa pessoa = null;
 
+            connection = ConnectionFactory.getConnection();
+            PessoaDao pessoaDao = new PessoaDao(connection);
 
-        Pessoa pessoa = null;
+            if (id != null) {
+                pessoa = pessoaDao.selectById(Long.valueOf(id));
+            } else {
+                pessoa = (Pessoa) request.getSession().getAttribute("usuario");
+            }
 
-        if( id != null){
-            PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
-            pessoa = pessoaDao.selectById(Long.valueOf(id));
+            request.setAttribute("perfil", pessoa);
+
+            RelacaoDao relacaoDao = new RelacaoDao(connection);
+            List<Relacao> relacoes = relacaoDao.selectByUserId(pessoa.getId());
+            request.setAttribute("relacoes", relacoes);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/perfil.jsp");
+            dispatcher.forward(request, response);
+        } finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
         }
-        else{
-            pessoa = (Pessoa) request.getSession().getAttribute("usuario");
-        }
-
-        request.setAttribute("perfil", pessoa);
-
-        RelacaoDao relacaoDao = new RelacaoDao(ConnectionFactory.getConnection());
-        List<Relacao> relacoes =  relacaoDao.selectByUserId(pessoa.getId());
-        request.setAttribute("relacoes", relacoes);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/perfil.jsp");
-        dispatcher.forward(request, response);
     }
+
 
 
     @Override

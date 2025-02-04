@@ -4,6 +4,7 @@ import com.exemplo.dao.AnimalDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
 import com.exemplo.model.Pessoa.Pessoa;
+import lombok.SneakyThrows;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,13 +29,13 @@ public class DoeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/doar.jsp");
-
-
         dispatcher.forward(request, response);
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Connection connection = null;
         try {
             String nome = req.getParameter("nome");
             String especie = req.getParameter("especie");
@@ -61,8 +63,8 @@ public class DoeServlet extends HttpServlet {
                     sexo,
                     dataDeNascimento
             );
-
-            AnimalDao animalDao = new AnimalDao(ConnectionFactory.getConnection());
+            connection = ConnectionFactory.getConnection();
+            AnimalDao animalDao = new AnimalDao(connection);
 
             Pessoa usuario = (Pessoa) req.getSession().getAttribute("usuario");
 
@@ -83,6 +85,11 @@ public class DoeServlet extends HttpServlet {
             req.setAttribute("mensagem", "Erro ao processar as datas: " + e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/doar.jsp");
             dispatcher.forward(req, resp);
+        }
+        finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
         }
     }
 }

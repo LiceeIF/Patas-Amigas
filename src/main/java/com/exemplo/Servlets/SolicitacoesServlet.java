@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 @WebServlet("/solicitacoes")
@@ -27,14 +28,24 @@ public class SolicitacoesServlet extends HttpServlet {
 
         Pessoa pessoa = (Pessoa) request.getSession().getAttribute("usuario");
 
-        SolicitacaoDao solicitacaoDao = new SolicitacaoDao(ConnectionFactory.getConnection());
-        List<Solicitacao> solicitacoes = solicitacaoDao.selectSolicitacoesByPessoaId(pessoa.getId());
+        Connection connection = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            SolicitacaoDao solicitacaoDao = new SolicitacaoDao(connection);
+            List<Solicitacao> solicitacoes = solicitacaoDao.selectSolicitacoesByPessoaId(pessoa.getId());
 
-        request.setAttribute("solicitacoes", solicitacoes);
+            request.setAttribute("solicitacoes", solicitacoes);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/solicitacoes.jsp");
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/solicitacoes.jsp");
+            dispatcher.forward(request, response);
+
+        } finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
+        }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

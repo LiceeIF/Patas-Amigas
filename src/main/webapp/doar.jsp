@@ -38,7 +38,7 @@
 
                 <div class="pedaco_form">
                     <label for="historico_medico">Histórico Médico</label>
-                    <input name="historico_medico" id="historico_medico" required></input>
+                    <input name="historico_medico" id="historico_medico" required>
 
                     <label for="data_de_resgate">Data de Resgate</label>
                     <input type="date" name="data_de_resgate" id="data_de_resgate" required>

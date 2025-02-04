@@ -21,6 +21,25 @@ public class SolicitacaoDao {
         this.connection = connection;
     }
 
+    public void deleteByAnimalId(Long id) throws SQLException {
+        String sql = "DELETE FROM Solicitacao WHERE id_animal = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Solicitação deletada com sucesso!");
+            } else {
+                System.out.println("Nenhuma solicitação encontrada com o ID fornecido.");
+            }
+        }
+        catch (SQLException err){
+            err.printStackTrace();
+        }
+    }
+
     public void insert(Solicitacao solicitacao) throws SQLException {
         String sqlQuery = "INSERT INTO Solicitacao (id_animal, id_dono, id_solicitador, aceito) VALUES (?, ?, ?, ?);";
 
@@ -37,8 +56,6 @@ public class SolicitacaoDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Erro ao inserir solicitação", e);
-        } finally {
-            connection.close();
         }
     }
 
@@ -104,9 +121,6 @@ public class SolicitacaoDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Erro ao selecionar solicitações", e);
-        }
-        finally {
-            connection.close();
         }
 
         return solicitacoes;

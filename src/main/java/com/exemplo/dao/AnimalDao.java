@@ -57,7 +57,7 @@ public class AnimalDao {
         String sql = "SELECT * FROM Animal WHERE id = ?";
         Animal animal = null;
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {  // Usando apenas 'connection'
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -81,15 +81,13 @@ public class AnimalDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.close();
-        }
+
 
         return animal;
     }
 
     public void inserirAnimal(Animal animal, Long idTutor, InputStream foto) throws SQLException {
-        String sqlAnimal = "INSERT INTO Animal (nome, especie, raca, data_de_nascimento, data_de_resgate, foto, sexo, historico_medico) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlAnimal = "INSERT INTO Animal (nome, especie, raca, data_de_nascimento, data_de_resgate, foto, sexo, historico_medico, status_de_adocao) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);";
         String sqlRelacao = "INSERT INTO Relacao (id_animal, id_usuario, relacao) VALUES (?, ?, ?);";
 
         try {
@@ -104,6 +102,7 @@ public class AnimalDao {
                 stmtAnimal.setBinaryStream(6, foto);
                 stmtAnimal.setString(7, animal.getSexo());
                 stmtAnimal.setString(8, animal.getHistoricoMedico());
+                stmtAnimal.setString(9, String.valueOf(animal.getStatusDeAdocao()));
 
                 int rowsInserted = stmtAnimal.executeUpdate();
 
@@ -133,9 +132,6 @@ public class AnimalDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Erro ao inserir o animal", e);
-        } finally {
-            connection.setAutoCommit(true);
-            connection.close();
         }
     }
 }

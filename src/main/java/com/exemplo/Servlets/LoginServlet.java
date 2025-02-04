@@ -6,6 +6,7 @@ import com.exemplo.model.Pessoa.Pessoa;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +28,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
+        Connection connection = ConnectionFactory.getConnection();
 
         try {
-            PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
+            PessoaDao pessoaDao = new PessoaDao(connection);
             Pessoa p = pessoaDao.selectLogin(email, senha);
             HttpSession session = request.getSession();
             session.setAttribute("usuario", p);
@@ -37,6 +39,11 @@ public class LoginServlet extends HttpServlet {
 
         } catch (IllegalArgumentException err) {
             redirecionarComErro(request, response, err.getMessage());
+        }
+        finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
         }
     }
 

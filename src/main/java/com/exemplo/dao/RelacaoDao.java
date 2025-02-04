@@ -20,6 +20,24 @@ public class RelacaoDao {
         this.connection = connection;
     }
 
+    public void insert(Relacao relacao) throws SQLException {
+        String sql = "INSERT INTO Relacao (id_animal, id_usuario, relacao) VALUES (?, ?, ?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, relacao.getAnimal().getId());
+            stmt.setLong(2, relacao.getUsuario().getId());
+            stmt.setString(3, "Dono");
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Falha ao inserir a relação, nenhuma linha foi afetada.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     public Relacao selectByAnimalId(Animal animal) throws SQLException {
         String sql = "SELECT r.id AS relacao_id, r.relacao, a.id AS animal_id, a.nome AS animal_nome, a.foto AS animal_foto, r.id_usuario " +
                 "FROM Relacao r " +
@@ -40,13 +58,13 @@ public class RelacaoDao {
 
                     long idUsuario = rs.getLong("id_usuario");
 
-                    PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
+                    PessoaDao pessoaDao = new PessoaDao(connection);
                     Pessoa pessoa = pessoaDao.selectById(idUsuario);
 
                     relacao = new Relacao(
                             rs.getLong("relacao_id"),
                             animalResult,
-                            pessoa, // A pessoa associada ao animal
+                            pessoa,
                             rs.getString("relacao")
                     );
                 } else {
@@ -56,8 +74,6 @@ public class RelacaoDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
-        } finally {
-            connection.close();
         }
 
         return relacao;
@@ -99,6 +115,24 @@ public class RelacaoDao {
         }
 
         return relacoes;
+    }
+
+    public void deleteRelacao(Long idDonoAntigo, Long idAnimal) throws SQLException {
+        String sql = "DELETE FROM Relacao WHERE id_usuario = ? AND id_animal = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idDonoAntigo);
+            stmt.setLong(2, idAnimal);
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Nenhuma relação encontrada para deletar.");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
 

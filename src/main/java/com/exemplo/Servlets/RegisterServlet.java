@@ -1,6 +1,7 @@
 package com.exemplo.Servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,7 +60,12 @@ public class RegisterServlet extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date dataDeNascimentoDate = sdf.parse(dataDeNascimento);
 
-        try{
+        Connection connection = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            PessoaDao pessoaDao = new PessoaDao(connection);
+
             Pessoa p = new Pessoa(
                     nome,
                     dataDeNascimentoDate,
@@ -70,21 +76,20 @@ public class RegisterServlet extends HttpServlet {
                     senha
             );
 
-            PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
+            pessoaDao.inserir(p);
+            response.sendRedirect("login.jsp");
 
-            try {
-                pessoaDao.inserir(p);
-                response.sendRedirect("login.jsp");
-            } catch (SQLException e) {
-                redirecionarComErro(request, response, e.getMessage());
-            }
-
-        }
-        catch (IllegalArgumentException err){
+        } catch (IllegalArgumentException err) {
             redirecionarComErro(request, response, "CPF inválido");
+        } catch (SQLException e) {
+            redirecionarComErro(request, response, e.getMessage());
+        } finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
         }
-
     }
+
 
     private void redirecionarComErro(HttpServletRequest request, HttpServletResponse response, String mensagemErro) throws ServletException, IOException {
         request.setAttribute("mensagemErro", mensagemErro);

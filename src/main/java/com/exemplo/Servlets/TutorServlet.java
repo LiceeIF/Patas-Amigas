@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,18 +35,25 @@ public class TutorServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PessoaDao pessoaDao = new PessoaDao(ConnectionFactory.getConnection());
+        Connection connection = null;
+        try {
+            connection = ConnectionFactory.getConnection();
 
-        Pessoa usuario = (Pessoa) req.getSession().getAttribute("usuario");
-        System.out.println(usuario);
-        Pessoa pessoa = (Pessoa) pessoaDao.updateTutor(
-                usuario.getId()
-        );
-        System.out.println(pessoa);
+            PessoaDao pessoaDao = new PessoaDao(connection);
+            Pessoa usuario = (Pessoa) req.getSession().getAttribute("usuario");
 
-        req.getSession().setAttribute("usuario", pessoa);
+            Pessoa pessoa = pessoaDao.updateTutor(usuario.getId());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/doar.jsp");
-        dispatcher.forward(req, resp);
+            req.getSession().setAttribute("usuario", pessoa);
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/doar.jsp");
+            dispatcher.forward(req, resp);
+
+        } finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
+        }
     }
+
 }

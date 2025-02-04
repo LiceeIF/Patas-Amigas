@@ -18,17 +18,28 @@ import java.util.List;
 
 @WebServlet("/funcionario")
 public class FuncionarioServlet extends  HttpServlet{
+
     @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        Connection connection = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            DtoDao dtoDao = new DtoDao(connection);
 
-        DtoDao dtoDao = new DtoDao(ConnectionFactory.getConnection());
-        request.setAttribute("racas", dtoDao.racasAnimais());
-        request.setAttribute("usuarios", dtoDao.tiposUsuarios());
+            request.setAttribute("especies", dtoDao.especieAnimais());
+            request.setAttribute("usuarios", dtoDao.tiposUsuarios());
+            request.setAttribute("cachorros", dtoDao.quantidadeRaca("Cachorro"));
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/funcionario.jsp");
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/funcionario.jsp");
+            dispatcher.forward(request, response);
+        } finally {
+            if (connection != null) {
+                ConnectionFactory.closeConnection();
+            }
+        }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
