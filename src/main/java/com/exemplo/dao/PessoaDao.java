@@ -3,6 +3,7 @@ package com.exemplo.dao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Pessoa.Pessoa;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,27 @@ public class PessoaDao {
     public PessoaDao(Connection connection) {
         this.connection = connection;
     }
+
+    public void updatePessoa(Pessoa pessoa) throws SQLException {
+        String sql = "UPDATE Pessoa SET nome=?, genero=?, telefone=?, email=?, senha=?, foto=? WHERE id=?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, pessoa.getNome());
+            stmt.setObject(2, pessoa.getGenero());
+            stmt.setString(3, pessoa.getTelefone());
+            stmt.setString(4, pessoa.getEmail());
+            stmt.setString(5, pessoa.getSenha());
+            stmt.setBinaryStream(6, pessoa.getFoto());
+            stmt.setLong(7, pessoa.getId());
+
+            stmt.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
 
     public Pessoa updateTutor(Long id) throws SQLException {
         String sql = "UPDATE Pessoa SET tutor = TRUE WHERE id = ?";
@@ -91,16 +113,17 @@ public class PessoaDao {
                             rs.getLong("id"),
                             rs.getString("nome"),
                             rs.getDate("data_de_nascimento"),
-                            Pessoa.GENERO.valueOf(rs.getString("genero")),
+                            rs.getString("genero"),
                             rs.getString("cpf"),
                             rs.getString("telefone"),
                             rs.getString("email"),
                             rs.getString("senha"),
-                            rs.getBlob("foto") != null ? rs.getBlob("foto").getBinaryStream() : null,
+                            rs.getBinaryStream("foto"),
                             rs.getBoolean("adm"),
                             rs.getBoolean("tutor"),
                             rs.getBoolean("adotante"),
                             rs.getBoolean("funcionario")
+
                     );
                 } else {
                     throw new SQLException("Pessoa não encontrada com o id fornecido.");
@@ -128,7 +151,7 @@ public class PessoaDao {
                     pessoa = new Pessoa(
                             rs.getString("nome"),
                             rs.getDate("data_de_nascimento"),
-                            Pessoa.GENERO.valueOf(rs.getString("genero")),
+                            rs.getString("genero"),
                             rs.getString("cpf"),
                             rs.getString("telefone"),
                             rs.getString("email"),
@@ -161,7 +184,7 @@ public class PessoaDao {
                     pessoa = new Pessoa(
                             rs.getString("nome"),
                             rs.getDate("dataDeNascimento"),
-                            Pessoa.GENERO.valueOf(rs.getString("genero")),
+                            rs.getString("genero"),
                             rs.getString("cpf"),
                             rs.getString("telefone"),
                             rs.getString("email"),
@@ -195,7 +218,7 @@ public class PessoaDao {
                             rs.getLong("id"),
                             rs.getString("nome"),
                             rs.getDate("data_de_nascimento"),
-                            Pessoa.GENERO.valueOf(rs.getString("genero")),
+                            rs.getString("genero"),
                             rs.getString("cpf"),
                             rs.getString("telefone"),
                             rs.getString("email"),

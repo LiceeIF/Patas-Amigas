@@ -14,7 +14,7 @@ public class Pessoa {
     @Setter private Long id;
     @Setter private String nome;
     @Setter private Date dataDeNascimento;
-    @Setter private GENERO genero;
+    @Setter private String genero;
     private String cpf;
     @Setter private String telefone;
     @Setter private String email;
@@ -32,11 +32,15 @@ public class Pessoa {
     }
 
     public byte[] getFotoByteArray() throws IOException {
-        if (fotoByteArray == null && foto != null) {
+        if (foto == null) {
+            return new byte[0];
+        }
+        if (fotoByteArray == null) {
             fotoByteArray = foto.readAllBytes();
         }
         return fotoByteArray;
     }
+
     public String getFotoBase64() throws IOException {
         return Base64.getEncoder().encodeToString(getFotoByteArray());
     }
@@ -50,7 +54,7 @@ public class Pessoa {
         this.email = email;
     }
 
-    public Pessoa(Long id, String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha, InputStream foto, Boolean adm, Boolean tutor, Boolean adotante, Boolean funcionario) {
+    public Pessoa(Long id, String nome, Date dataDeNascimento, String genero, String cpf, String telefone, String email, String senha, InputStream foto, Boolean adm, Boolean tutor, Boolean adotante, Boolean funcionario) {
         this.id = id;
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
@@ -66,7 +70,7 @@ public class Pessoa {
         this.funcionario = funcionario;
     }
 
-    public Pessoa(String nome, Date dataDeNascimento, GENERO genero, String cpf, String telefone, String email, String senha) {
+    public Pessoa(String nome, Date dataDeNascimento, String genero, String cpf, String telefone, String email, String senha) {
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
         this.genero = genero;

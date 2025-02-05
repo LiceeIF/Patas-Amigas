@@ -16,7 +16,7 @@
         <img src="images/logo.png" height="80px" alt="logo">
 
         <div>
-            <a href="solicitacoes">Busca</a>
+            <a href="pesquisar">Busca</a>
             <a href="solicitacoes">Solicitações</a>
             <a href="home">Home Page</a>
             <a href="doar">Doe um amiguinho!</a>

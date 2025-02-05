@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "Selkirk Rex", "Siamês", "Siberiano", "Singapura", "Somali", "Sphynx",
             "Tonquinês", "Bobtail Japonês","Vira-Lata"
         ],
-        "Pássaro": [
+        "Passaro": [
             "Agapornis", "Arara Azul", "Cacatua", "Calopsita", "Canário", "Curió",
             "Galo-da-Serra", "Jandaia", "Mandarim", "Maracanã", "Papagaio",
             "Periquito", "Pintassilgo", "Rouxinol", "Sabiá", "Tucano"
         ],
-        "Réptil": [
+        "Reptil": [
             "Cágado", "Cobra do Milho", "Dragão Barbudo", "Gecko Leopard",
             "Iguana", "Jiboia", "Lagarto Monitor", "Tartaruga Tigre-d'Água", "Teiú"
         ],
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Acará Bandeira", "Acará Disco", "Betta", "Cascudo", "Guppy",
             "Kinguios", "Molinésia", "Neon Tetra", "Oscar", "Peixe Palhaço"
         ],
-        "Anfíbio": [
+        "Anfibio": [
             "Axolote", "Perereca Verde", "Rã Dourada", "Salamandra", "Sapo Cururu"
         ]
     };

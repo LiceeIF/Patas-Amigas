@@ -4,35 +4,30 @@ body {
     margin: 0;
     box-sizing: border-box;
     height: 100vh;
-    width: 100%;
-    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: end;
+    display: flex;
     flex-direction: column;
-    position: relative;
 }
 
-form {
-    background-color: rgba(242, 120, 161, 0.44);
-    padding: 2rem;
-    min-width: 50%;
-    max-width: 500px;
-    height: 90%;
+#main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    justify-content: center;
+    width: 50%;
+    margin-top: 20px;
 }
 
-form .form-row {
-    display: flex;
-    justify-content: space-between;
+form {
+    background-color: rgba(245, 189, 99, 0.49);
+    padding: 3.6rem;
+    border-radius: 10px;
     width: 100%;
-    margin-bottom: 1rem;
-}
-
-form .form-row > div {
-    width: 48%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form label {
@@ -50,6 +45,7 @@ form input, form select {
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
+    max-width: 400px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -65,18 +61,17 @@ form input::placeholder, form select::placeholder {
     font-style: italic;
 }
 
-form .erro-mensagem {
-    color: #b18989;
-    font-size: 2rem;
-    margin-top: 1rem;
-    font-weight: bold;
-    background-color: #070000;
-    padding:0.2rem ;
-    margin-bottom: 0.5rem;
-    border-radius: 16px;
+form input[type="file"] {
+    padding: 0.6rem 1.2rem;
 }
 
-form #next_button {
+form .erro-mensagem {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+#next_button {
     background-color: #f5bd63;
     color: black;
     font-size: 1rem;
@@ -86,31 +81,15 @@ form #next_button {
     cursor: pointer;
     border: none;
     width: 100%;
+    max-width: 400px;
 }
 
-form #next_button:hover {
+#next_button:hover {
     background-color: #f278a1;
     color: #fff5ec;
 }
 
-form a {
-    margin-top: 1rem;
-    color: #f5bd63;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-form a:hover {
-    color: #f278a1;
-}
-
-video.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    filter: blur(3px);
-    z-index: -1;
+#next_button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(242, 120, 161, 0.7);
 }

@@ -1,10 +1,12 @@
 package com.exemplo.Servlets;
 
+import com.exemplo.dao.RegistroDao;
 import com.exemplo.dao.RelacaoDao;
 import com.exemplo.dao.SolicitacaoDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
 import com.exemplo.model.Pessoa.Pessoa;
+import com.exemplo.model.Registro.Registro;
 import com.exemplo.model.Relacao.Relacao;
 import lombok.SneakyThrows;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Timestamp;
 
 @WebServlet("/aceitar_solicitacao")
 public class AprovarSolicitacaoServlet extends HttpServlet {
@@ -59,7 +62,19 @@ public class AprovarSolicitacaoServlet extends HttpServlet {
             SolicitacaoDao solicitacaoDao = new SolicitacaoDao(connection);
             solicitacaoDao.deleteByAnimalId(animalId);
 
-            resp.sendRedirect(req.getContextPath() + "/home");
+            RegistroDao registroDao = new RegistroDao(connection);
+            Registro registo = new Registro(
+                    "Doação",
+                    "Tutor " + antigoDonoId + " aceitou a solicitação de doação de usuário " + novoDonoId + " do animal " + animalId,
+                        antigoDonoId,
+                    new Timestamp(System.currentTimeMillis())
+            );
+
+            registroDao.insert(
+                registo
+            );
+
+            resp.sendRedirect( "/home");
         } catch (NumberFormatException e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDs inválidos.");
         } finally {

@@ -83,6 +83,7 @@ public class AnimalPerfilServlet extends HttpServlet {
             solicitacaoDao.insert(solicitacao);
 
             ConnectionFactory.closeConnection();
+            resp.sendRedirect( "/home");
         } else {
             System.out.println("Erro: Animal não encontrado!");
             resp.sendRedirect("errorPage.jsp");

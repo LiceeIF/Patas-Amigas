@@ -11,7 +11,7 @@
 <div id="main">
 
     <div id="info">
-        <img src="data:image/jpeg;base64,${perfil.foto}" width="210" height="210" alt="Foto do perfil">
+        <img src="data:image/jpeg;base64,${perfil.fotoBase64}" width="210" height="210" id="foto_perfil" alt="Foto do perfil">
 
         <h2>
             ${perfil.nome}
@@ -37,20 +37,18 @@
     <div id="tags_div">
         <c:if test="${perfil.funcionario}">
             <div class="tags">
-                <form action="/funcionario" method="POST">
-                    <input type="submit" value="Funcionário">
-                </form>
+                <a href="funcionario">Funcionário</a>
 
             </div>
         </c:if>
         <c:if test="${perfil.adotante}">
             <div class="tags">
-                <p >Adotante</p>
+                <a href="">Adotante</a>
             </div>
         </c:if>
         <c:if test="${perfil.tutor}">
             <div class="tags">
-                <p >Tutor</p>
+                <a href="">Tutor</a>
             </div>
         </c:if>
         <c:if test="${perfil.adm}">
@@ -60,7 +58,7 @@
         </c:if>
     </div>
     <br>
-    Animas:
+    <h3>Animais: </h3>
     <div
     style="display: flex; align-items: center; justify-content: center; width: 80%">
         <c:forEach items="${relacoes}" var="relacao">
@@ -73,10 +71,17 @@
     </div>
 
 
+    <c:if test="${logout_true}">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <form action="logout" method="post" style="margin: 0">
+                <button style="padding: 0.4rem" id="logout" type="submit">Logout</button>
+            </form>
+            <div style="padding: 0.4rem" id="editar_button">
+                <a href="editar">Editar Perfil</a>
+            </div>
+        </div>
+    </c:if>
 
-    <form action="logout" method="post">
-        <button id="logout" type="submit">Logout</button>
-    </form>
 
 </div>
 </body>

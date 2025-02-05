@@ -30,6 +30,7 @@ public class PerfilServlet extends HttpServlet {
         try {
             request.setAttribute("perfil", null);
             request.setAttribute("solicitacoes", null);
+            request.setAttribute("logout_true", false);
 
             String id = request.getParameter("id");
             Pessoa pessoa = null;
@@ -37,10 +38,12 @@ public class PerfilServlet extends HttpServlet {
             connection = ConnectionFactory.getConnection();
             PessoaDao pessoaDao = new PessoaDao(connection);
 
-            if (id != null) {
-                pessoa = pessoaDao.selectById(Long.valueOf(id));
+            pessoa = (Pessoa) request.getSession().getAttribute("usuario");
+
+            if (id == null || pessoa.getId() == Long.parseLong(id)) {
+                request.setAttribute("logout_true", true);
             } else {
-                pessoa = (Pessoa) request.getSession().getAttribute("usuario");
+                pessoa = pessoaDao.selectById(Long.valueOf(id));
             }
 
             request.setAttribute("perfil", pessoa);

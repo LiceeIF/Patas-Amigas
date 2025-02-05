@@ -1,0 +1,25 @@
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    background-color: rgba(245, 189, 99, 0.14);
+}
+
+th{
+    background-color: rgba(245, 189, 99, 0.53);
+
+}
+
+body {
+    background-color: #fff5ec;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    height: 85vh;
+}
+
+#main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

@@ -2,6 +2,7 @@ package com.exemplo.Servlets;
 
 import com.exemplo.dao.AnimalDao;
 import com.exemplo.dao.DtoDao;
+import com.exemplo.dao.RegistroDao;
 import com.exemplo.db.ConnectionFactory;
 import com.exemplo.model.Animal.Animal;
 import lombok.SneakyThrows;
@@ -26,7 +27,9 @@ public class FuncionarioServlet extends  HttpServlet{
         try {
             connection = ConnectionFactory.getConnection();
             DtoDao dtoDao = new DtoDao(connection);
+            RegistroDao registroDao = new RegistroDao(connection);
 
+            request.setAttribute("registros", registroDao.select());
             request.setAttribute("especies", dtoDao.especieAnimais());
             request.setAttribute("usuarios", dtoDao.tiposUsuarios());
             request.setAttribute("cachorros", dtoDao.quantidadeRaca("Cachorro"));

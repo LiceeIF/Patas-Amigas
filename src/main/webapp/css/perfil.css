@@ -13,6 +13,41 @@ body {
     flex-direction: column;
 }
 
+#foto_perfil {
+    border-radius: 100%;
+    margin-top: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #f5bd63;
+}
+
+#foto_perfil img {
+    width: 100%;
+    height: auto;
+    transition: transform 300ms ;
+}
+
+#foto_perfil:hover  {
+    animation: perfil_animatic 3s infinite;
+}
+
+@keyframes perfil_animatic {
+    33% {
+        transform: rotate(-15deg);
+    }
+    66% {
+        transform: rotate(15deg);
+    }
+    100%{
+        transform: rotate(0deg);
+
+    }
+}
+
+
 .tags{
     background-color: rgba(246, 208, 109, 0.33);
     border-color: #f5bd63;
@@ -36,7 +71,7 @@ body {
     border-color: #f278a1;
 }
 
-.tags p{
+.tags a{
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
 
@@ -55,7 +90,7 @@ body {
     flex-direction: column;
 }
 
-#logout{
+#logout, #editar_button{
     background-color: rgba(246, 208, 109, 0.33);
     border-color: #f5bd63;
     border-width: 2px;
@@ -68,14 +103,25 @@ body {
     font-size: 0.9rem;
     border-radius: 16px;
     cursor: pointer;
-    transition:  all ease-in-out 400ms;
+    transition:  all ease-in-out 200ms;
     font-weight: bold;
     margin: 2rem;
 }
 
+a{
+    text-decoration: none;
+    color: #4e3710;
+
+}
+
 #logout:hover{
-    background-color: rgba(242, 120, 120, 0.44);
-    border-color: #ea2a2a;
+    background-color: rgba(225, 25, 25, 0.44);
+    border-color: #ea0f0f;
+}
+
+#editar_button:hover{
+    background-color: rgba(25, 208, 225, 0.44);
+    border-color: #0f54ea;
 }
 
 .botoes_menu, .botoes_menu img {

@@ -4,7 +4,7 @@
 <html lang="pt-br">
 <head>
     <title>Patas Amigas: Funcionário</title>
-    <link rel="stylesheet" type="text/css" href="../css/doar.css">
+    <link rel="stylesheet" type="text/css" href="../css/funcionario.css">
 
 </head>
 <body>
@@ -13,15 +13,35 @@
         <a href="/home">Voltar para página inicial</a>
     </header>
     <div id="main">
-        funcionario
-    </div>
+        <div style="height: 300px;">
+            <canvas id="grafico_especies"></canvas>
+        </div>
 
-    <div style="height: 300px;">
-        <canvas id="grafico_especies"></canvas>
-    </div>
+        <div style="height: 300px;">
+            <canvas id="grafico_racas"></canvas>
+        </div>
 
-    <div style="height: 300px;">
-        <canvas id="grafico_racas"></canvas>
+        <table width="50%">
+            <caption >Registros</caption>
+
+            <tr>
+                <th>Id</th>
+                <th>Ação</th>
+                <th>Descrição</th>
+                <th>Id usuário</th>
+                <th>Data</th>
+            </tr>
+            <c:forEach var="registro" items="${registros}">
+                <tr>
+                    <td>${registro.id}</td>
+                    <td>${registro.tipoAcao}</td>
+                    <td>${registro.descricao}</td>
+                    <td>${registro.pessoaId}</td>
+                    <td>${registro.dataAcao}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
     </div>
 
 

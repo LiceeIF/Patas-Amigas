@@ -69,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
             Pessoa p = new Pessoa(
                     nome,
                     dataDeNascimentoDate,
-                    Pessoa.GENERO.valueOf(genero),
+                    genero,
                     cpf,
                     telefone.replaceAll("\\D", ""),
                     email,

@@ -89,6 +89,7 @@ public class AnimalDao {
     public void inserirAnimal(Animal animal, Long idTutor, InputStream foto) throws SQLException {
         String sqlAnimal = "INSERT INTO Animal (nome, especie, raca, data_de_nascimento, data_de_resgate, foto, sexo, historico_medico, status_de_adocao) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);";
         String sqlRelacao = "INSERT INTO Relacao (id_animal, id_usuario, relacao) VALUES (?, ?, ?);";
+        String sqlRegistro = "INSERT INTO Registro (tipo_acao, descricao, pessoa_id, data_acao) VALUES (?, ?, ?, ?);"; // SQL para inserir o Registro
 
         try {
             connection.setAutoCommit(false);
@@ -119,19 +120,29 @@ public class AnimalDao {
                                     stmtRelacao.executeUpdate();
                                 }
                             }
+
+                            try (PreparedStatement stmtRegistro = connection.prepareStatement(sqlRegistro)) {
+                                stmtRegistro.setString(1, "Cadastro de Animal");
+                                stmtRegistro.setString(2, "Animal " + animal.getNome() + " colocado na adoção por Tutor/a.");
+                                stmtRegistro.setLong(3, Math.toIntExact(idTutor));
+                                stmtRegistro.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+                                stmtRegistro.executeUpdate();
+                            }
+
                         }
                     }
                 }
 
                 connection.commit();
-                System.out.println("Animal e relação inseridos com sucesso!");
+                System.out.println("Animal, relação e registro inseridos com sucesso!");
             } catch (SQLException e) {
                 connection.rollback();
-                throw new SQLException("Erro ao inserir o animal e a relação: " + e.getMessage(), e);
+                throw new SQLException("Erro ao inserir o animal, a relação ou o registro: " + e.getMessage(), e);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Erro ao inserir o animal", e);
         }
     }
+
 }
