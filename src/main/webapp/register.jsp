@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <a href="/login" style="margin-bottom: 2rem">Já tem uma conta? Entre!</a>
+    <h3><a href="/login" style="margin-bottom: 2rem">Já tem uma conta? Entre!</a></h3>
 
     <c:if test="${not empty mensagemErro}">
         <div class="erro-mensagem">

@@ -29,7 +29,9 @@ public class AnimalPerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        request.setAttribute("animal", null);
+        HttpSession session = request.getSession();
+
+        session.setAttribute("animal", null);
 
         Connection connection = null;
 
@@ -40,7 +42,7 @@ public class AnimalPerfilServlet extends HttpServlet {
                 AnimalDao animalDao = new AnimalDao(connection);
                 Animal animal = animalDao.selectById(Long.valueOf(id));
 
-                request.setAttribute("animal", animal);
+                session.setAttribute("animal", animal);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/animal.jsp");
                 dispatcher.forward(request, response);
             } else {
@@ -82,10 +84,11 @@ public class AnimalPerfilServlet extends HttpServlet {
             solicitacaoDao.insert(solicitacao);
 
             ConnectionFactory.closeConnection();
-            resp.sendRedirect( "/home");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
+            dispatcher.forward(req, resp);
         } else {
-            System.out.println("Erro: Animal não encontrado!");
-            resp.sendRedirect("errorPage.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
+            dispatcher.forward(req, resp);
         }
     }
 }

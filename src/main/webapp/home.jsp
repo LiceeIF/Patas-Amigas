@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="main">
-        <img id="imagem_fofa" src="images/imagem%20home.png" width="1360" alt="logo">
+        <img id="imagem_fofa" src="images/imagem%20home.png" style="box-shadow: #070000" width="1360" alt="logo">
             <div>
                 <p>
                     Está procurando amigos para acompanhar seus dias e não sabe como? Olhe as rede com novos companheiros, encontre lojas para acessórios e adote um novo amigo.

@@ -18,7 +18,7 @@
     <label for="senha"><b>Senha:</b></label>
     <input type="password" placeholder="anima$F0fos" name="senha" id="senha" required>
 
-    <a href="/register">Não tem uma conta? Crie!</a>
+    <h3><a href="/register">Não tem uma conta? Crie!</a></h3>
     <c:if test="${not empty mensagemErro}">
         <div class="erro-mensagem">
             <c:out value="${mensagemErro}"/>

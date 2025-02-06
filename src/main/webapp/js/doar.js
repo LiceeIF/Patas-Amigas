@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Shar Pei", "Shih Tzu", "Terrier Brasileiro", "Weimaraner", "Whippet", "Yorkshire Terrier","Vira-Lata"
         ],
         "Gato": [
-            "Abyssinian", "American Shorthair", "Angorá Turco", "Bengal", "Bombay",
+            "Abyssinian", "American Shorthair", "Angora Turco", "Bengal", "Bombay",
             "British Shorthair", "Burmese", "Chartreux", "Cornish Rex", "Devon Rex",
             "Exotico", "Havana Brown", "Himalaio", "Maine Coon", "Manx", "Munchkin",
             "Norueguês da Floresta", "Persa", "Ragdoll", "Savannah", "Scottish Fold",

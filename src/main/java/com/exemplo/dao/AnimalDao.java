@@ -17,6 +17,20 @@ public class AnimalDao {
         this.connection = connection;
     }
 
+    @SneakyThrows
+    public  void updateStatusAdocao(Long id){
+        String sql = "UPDATE `Animal` SET `status_de_adocao` = 'Adotado' WHERE (`id` = ?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
+        catch (SQLException err){
+            err.printStackTrace();
+        }
+
+    }
+
     public List<Animal> listarPorEspecie(String[] racas) throws SQLException {
         String sql = "";
 

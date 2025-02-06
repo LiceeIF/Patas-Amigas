@@ -71,16 +71,12 @@
                         ${animal.sexo == 'Macho' ? 'Macho ♂' : 'Fêmea ♀️'}
                     </p>
                 </div>
-                
-                <div  class="alinha">
-                    Data de resgate: <p>${animal.dataDeResgate}</p>
-                </div>
-                
+
             </div>
             <div class="infozinhas">
                 <div class="alinha" style="height: 5rem;">
                     Histórico Médico 💊❤️‍:
-                    <p>
+                    <p >
                         ${animal.historicoMedico}
                     </p>
                 </div>

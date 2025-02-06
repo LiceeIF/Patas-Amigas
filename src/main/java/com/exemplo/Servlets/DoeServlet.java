@@ -71,7 +71,7 @@ public class DoeServlet extends HttpServlet {
             animalDao.inserirAnimal(animal, usuario.getId(), fotoStream);
 
             req.setAttribute("mensagem", "Animal cadastrado com sucesso!");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
             dispatcher.forward(req, resp);
 
         } catch (SQLException | IOException | ServletException e) {

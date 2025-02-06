@@ -1,5 +1,6 @@
 package com.exemplo.Servlets;
 
+import com.exemplo.dao.AnimalDao;
 import com.exemplo.dao.RegistroDao;
 import com.exemplo.dao.RelacaoDao;
 import com.exemplo.dao.SolicitacaoDao;
@@ -73,6 +74,9 @@ public class AprovarSolicitacaoServlet extends HttpServlet {
             registroDao.insert(
                 registo
             );
+
+            AnimalDao animalDao = new AnimalDao(connection);
+            animalDao.updateStatusAdocao(animalId);
 
             resp.sendRedirect( "/solicitacoes");
         } catch (NumberFormatException e) {

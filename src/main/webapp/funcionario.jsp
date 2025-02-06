@@ -34,27 +34,29 @@
                 </div>
             </div>
         </div>
+        <div style="max-height: 80%; overflow-x: auto; width: 100%; padding: 1rem;">
+            <table width="100%" style="min-width: 800px;">
+                <caption>Registros</caption>
 
-        <table width="50%">
-            <caption >Registros</caption>
-
-            <tr>
-                <th>Id</th>
-                <th>Ação</th>
-                <th>Descrição</th>
-                <th>Id usuário</th>
-                <th>Data</th>
-            </tr>
-            <c:forEach var="registro" items="${registros}">
                 <tr>
-                    <td>${registro.id}</td>
-                    <td>${registro.tipoAcao}</td>
-                    <td>${registro.descricao}</td>
-                    <td>${registro.pessoaId}</td>
-                    <td>${registro.dataAcao}</td>
+                    <th>Id</th>
+                    <th>Ação</th>
+                    <th>Descrição</th>
+                    <th>Id usuário</th>
+                    <th>Data</th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach var="registro" items="${registros}">
+                    <tr>
+                        <td>${registro.id}</td>
+                        <td>${registro.tipoAcao}</td>
+                        <td>${registro.descricao}</td>
+                        <td>${registro.pessoaId}</td>
+                        <td>${registro.dataAcao}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+
 
     </div>
 

@@ -12,7 +12,7 @@ body {
     cursor: pointer;
     font-size: larger;
     padding: 5px 10px;
-    
+
 }
 
 #main {
@@ -115,7 +115,7 @@ h1 {
 }
 
 .github img {
-    object-fit: cover; 
+    object-fit: cover;
     border-radius: 50%;
     width:140px;
 
@@ -126,7 +126,7 @@ h1 {
     transition: background 700ms ease, transform 700ms ease;
     box-shadow: 0 0 40px #f278a1;
     transform: scale(1.30);
-    
+
 }
 
 .github button:not(:hover) {
@@ -154,7 +154,7 @@ h1 {
     }
 
     .colaboradores {
-        width: 25%; 
+        width: 25%;
     }
 }
 
@@ -167,19 +167,19 @@ h1 {
     }
 
     .colaboradores {
-        width: 80%; 
-        margin-bottom: 20px; 
+        width: 80%;
+        margin-bottom: 20px;
     }
 
     .github button {
         margin: 20px;
         height: 100px;
-        width: 100px; 
+        width: 100px;
     }
 
     .github img {
         height: 100px;
-        width: 100px; 
+        width: 100px;
     }
     h1 {
         font-size: 1.5rem;
