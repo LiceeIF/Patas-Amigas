@@ -62,19 +62,19 @@ http://localhost:5500/
 </a>
 <span class="button-text"> 
   Ana Luisa de Oliveira Camardella
-</span> 
+</span> <br>
 
 <a href="https://github.com/ca12lossr">
   <img src="https://avatars.githubusercontent.com/u/126599111?v=4" alt="GitHub" style="width:40px; height:40px;" />
 </a>
 <span class="button-text"> 
   Carlos Alberto Pereira Lustosa Junior
-</span> 
+</span> <br>
 
 <a href="https://github.com/JoaoAHaupt">
   <img src="https://avatars.githubusercontent.com/u/127232326?v=4" alt="GitHub" style="width:40px; height:40px;" />
 </a>
 <span class="button-text"> 
   João Augusto Haupt Fonseca Oliveira
-</span> 
+</span> <br> 
 
