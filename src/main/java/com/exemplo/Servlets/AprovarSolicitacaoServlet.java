@@ -74,7 +74,7 @@ public class AprovarSolicitacaoServlet extends HttpServlet {
                 registo
             );
 
-            resp.sendRedirect( "/home");
+            resp.sendRedirect( "/solicitacoes");
         } catch (NumberFormatException e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDs inválidos.");
         } finally {

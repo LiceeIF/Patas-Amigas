@@ -15,12 +15,14 @@ body {
 form {
     background-color: rgba(242, 120, 161, 0.44);
     padding: 2rem;
+
     min-width: 50%;
     max-width: 500px;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     position: absolute;
 }
 
@@ -37,8 +39,7 @@ form .form-row > div {
 
 form label {
     margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #333;
+    color: #000000;
 }
 
 form input, form select {
@@ -85,7 +86,7 @@ form #next_button {
     transition: all 200ms ease-in-out;
     cursor: pointer;
     border: none;
-    width: 100%;
+    width: 20%;
 }
 
 form #next_button:hover {
@@ -93,16 +94,9 @@ form #next_button:hover {
     color: #fff5ec;
 }
 
-form a {
-    margin-top: 1rem;
-    color: #f5bd63;
-    text-decoration: none;
-    font-size: 1rem;
-}
 
-form a:hover {
-    color: #f278a1;
-}
+
+
 
 video.background-video {
     position: fixed;

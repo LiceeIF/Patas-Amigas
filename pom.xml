@@ -129,7 +129,7 @@
           <version>2.2</version>
           <configuration>
             <path>/</path>
-            <port>5000</port>
+            <port>5500</port>
         </configuration>
       </plugin>
       </plugins>

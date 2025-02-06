@@ -26,11 +26,9 @@ public class HomeServlet extends HttpServlet {
         try {
             connection = ConnectionFactory.getConnection();
             AnimalDao animalDao = new AnimalDao(connection);
-
+            
             List<Animal> animais = animalDao.select();
-            if (animais == null) {
-                System.out.println("Nenhum animal encontrado.");
-            }
+            
             request.setAttribute("animais", animais);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");

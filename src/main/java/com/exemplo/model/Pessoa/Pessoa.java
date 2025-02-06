@@ -9,7 +9,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Getter
-
 public class Pessoa {
     @Setter private Long id;
     @Setter private String nome;
@@ -52,6 +51,17 @@ public class Pessoa {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+    }
+
+    public Pessoa(Long id, String nome, InputStream foto, String genero, String telefone, Boolean funcionario, Boolean tutor, Boolean adotante) {
+        this.id = id;
+        this.nome = nome;
+        this.foto = foto;
+        this.genero = genero;
+        this.telefone = telefone;
+        this.funcionario = funcionario;
+        this.tutor = tutor;
+        this.adotante = adotante;
     }
 
     public Pessoa(Long id, String nome, Date dataDeNascimento, String genero, String cpf, String telefone, String email, String senha, InputStream foto, Boolean adm, Boolean tutor, Boolean adotante, Boolean funcionario) {

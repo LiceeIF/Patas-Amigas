@@ -1,13 +1,22 @@
 package com.exemplo.dao;
 
 import com.exemplo.db.ConnectionFactory;
+import com.exemplo.model.Animal.Animal;
 import com.exemplo.model.Pessoa.Pessoa;
 
+import lombok.SneakyThrows;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PessoaDao {
     private Connection connection;
@@ -16,26 +25,59 @@ public class PessoaDao {
         this.connection = connection;
     }
 
-    public void updatePessoa(Pessoa pessoa) throws SQLException {
-        String sql = "UPDATE Pessoa SET nome=?, genero=?, telefone=?, email=?, senha=?, foto=? WHERE id=?";
+    public List<Pessoa> select() throws SQLException {
+        List<Pessoa> pessoas = new ArrayList<>();
+
+        String sql = "SELECT * FROM Pessoa LIMIT 100";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Pessoa pessoa = new Pessoa(
+                        rs.getLong("id"),
+                        rs.getString("nome"),
+                        rs.getBinaryStream("foto"),
+                        rs.getString("genero"),
+                        rs.getString("telefone"),
+                        rs.getBoolean("funcionario"),
+                        rs.getBoolean("tutor"),
+                        rs.getBoolean("adotante")
+                );
+                pessoas.add(pessoa);
+            }
+
+            return pessoas;
+        }
+    }
+
+    public void updatePessoa(Pessoa pessoa) throws SQLException, IOException  {
+        String sql = "UPDATE Pessoa SET nome=?, genero=?, telefone=?, email=?, senha=?, foto=? WHERE id=?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, pessoa.getNome());
             stmt.setObject(2, pessoa.getGenero());
             stmt.setString(3, pessoa.getTelefone());
             stmt.setString(4, pessoa.getEmail());
             stmt.setString(5, pessoa.getSenha());
-            stmt.setBinaryStream(6, pessoa.getFoto());
+    
+            InputStream fotoStream = pessoa.getFoto();
+            if (fotoStream != null) {
+                stmt.setBinaryStream(6, fotoStream, fotoStream.available()); 
+            } else {
+                stmt.setNull(6, java.sql.Types.BLOB); 
+            }
+    
             stmt.setLong(7, pessoa.getId());
-
             stmt.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
     }
-
+    
 
     public Pessoa updateTutor(Long id) throws SQLException {
         String sql = "UPDATE Pessoa SET tutor = TRUE WHERE id = ?";
@@ -55,11 +97,10 @@ public class PessoaDao {
         }
     }
 
-    public void inserir(Pessoa pessoa) throws SQLException {
-        String sql = "INSERT INTO Pessoa (nome, email, senha, data_de_nascimento, cpf, telefone, genero) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    public void inserir(Pessoa pessoa) throws SQLException, IOException {
+        String sql = "INSERT INTO Pessoa (nome, email, senha, data_de_nascimento, cpf, telefone, genero, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getEmail());
             stmt.setString(3, pessoa.getSenha());
@@ -67,18 +108,25 @@ public class PessoaDao {
             stmt.setString(5, pessoa.getCpf());
             stmt.setString(6, pessoa.getTelefone());
             stmt.setString(7, pessoa.getGenero().toString());
-
+    
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("imagens/default-image.jpg");
+    
+            if (inputStream == null) {
+                throw new IOException("Imagem padrão não encontrada.");
+            }
+    
+            stmt.setBinaryStream(8, inputStream, inputStream.available());
+    
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Pessoa inserida com sucesso!");
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
             throw new SQLException(e);
         }
-
     }
-
+    
     public void delete(Long id) throws SQLException {
         String sql = "DELETE FROM Pessoa WHERE id = ?";
 

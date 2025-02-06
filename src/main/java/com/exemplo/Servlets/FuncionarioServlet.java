@@ -4,6 +4,7 @@ import com.exemplo.dao.AnimalDao;
 import com.exemplo.dao.DtoDao;
 import com.exemplo.dao.RegistroDao;
 import com.exemplo.db.ConnectionFactory;
+import com.exemplo.dto.DtoGenerico;
 import com.exemplo.model.Animal.Animal;
 import lombok.SneakyThrows;
 
@@ -33,7 +34,13 @@ public class FuncionarioServlet extends  HttpServlet{
             request.setAttribute("especies", dtoDao.especieAnimais());
             request.setAttribute("usuarios", dtoDao.tiposUsuarios());
             request.setAttribute("cachorros", dtoDao.quantidadeRaca("Cachorro"));
+            request.setAttribute("gatos", dtoDao.quantidadeRaca("Gato"));
+            request.setAttribute("passaros", dtoDao.quantidadeRaca("Passaro"));
 
+            for(DtoGenerico dtoGenerico : dtoDao.quantidadeRaca("Passaro")){
+                System.out.println(dtoGenerico.getTipo());
+            }
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("/funcionario.jsp");
             dispatcher.forward(request, response);
         } finally {

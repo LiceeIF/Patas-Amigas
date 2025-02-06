@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "Gato": [
             "Abyssinian", "American Shorthair", "Angorá Turco", "Bengal", "Bombay",
             "British Shorthair", "Burmese", "Chartreux", "Cornish Rex", "Devon Rex",
-            "Exótico", "Havana Brown", "Himalaio", "Maine Coon", "Manx", "Munchkin",
+            "Exotico", "Havana Brown", "Himalaio", "Maine Coon", "Manx", "Munchkin",
             "Norueguês da Floresta", "Persa", "Ragdoll", "Savannah", "Scottish Fold",
             "Selkirk Rex", "Siamês", "Siberiano", "Singapura", "Somali", "Sphynx",
-            "Tonquinês", "Bobtail Japonês","Vira-Lata"
+            "Tonquinês", "Bobtail Japones","Vira-Lata"
         ],
         "Passaro": [
             "Agapornis", "Arara Azul", "Cacatua", "Calopsita", "Canário", "Curió",
@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "Periquito", "Pintassilgo", "Rouxinol", "Sabiá", "Tucano"
         ],
         "Reptil": [
-            "Cágado", "Cobra do Milho", "Dragão Barbudo", "Gecko Leopard",
-            "Iguana", "Jiboia", "Lagarto Monitor", "Tartaruga Tigre-d'Água", "Teiú"
+            "Cagado", "Cobra do Milho", "Dragão Barbudo", "Gecko Leopard",
+            "Iguana", "Jiboia", "Lagarto Monitor", "Tartaruga Tigre-d'Agua", "Teiu"
         ],
         "Roedor": [
-            "Chinchila", "Esquilo-da-Mongólia", "Hamster Anão Russo",
-            "Hamster Sírio", "Porquinho-da-Índia", "Rato Dumbo"
+            "Chinchila", "Esquilo-da-Mongolia", "Hamster Anao Russo",
+            "Hamster Sirio", "Porquinho-da-India", "Rato Dumbo"
         ],
         "Peixe": [
             "Acará Bandeira", "Acará Disco", "Betta", "Cascudo", "Guppy",

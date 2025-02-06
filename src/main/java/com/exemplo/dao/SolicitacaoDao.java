@@ -21,6 +21,27 @@ public class SolicitacaoDao {
         this.connection = connection;
     }
 
+    public void deleteById(Long idAnimal, Long idDono, Long idSolicitador) throws SQLException {
+        String sql = "DELETE FROM Solicitacao WHERE id_animal = ? and id_dono = ? and id_solicitador= ? ";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idAnimal);
+            stmt.setLong(2, idDono);
+            stmt.setLong(3, idSolicitador);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Solicitação deletada com sucesso!");
+            } else {
+                System.out.println("Nenhuma solicitação encontrada com o ID fornecido.");
+            }
+        }
+        catch (SQLException err){
+            err.printStackTrace();
+        }
+    }
+
     public void deleteByAnimalId(Long id) throws SQLException {
         String sql = "DELETE FROM Solicitacao WHERE id_animal = ?";
 

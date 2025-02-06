@@ -20,18 +20,13 @@ public class FilterSession implements Filter {
         String path = httpRequest.getRequestURI();
         HttpSession session = httpRequest.getSession(false);
 
-        if(session == null){
-            chain.doFilter(request, response);
-            return;
-        }
-
         if (path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".jpg") || path.endsWith(".png") || path.endsWith(".gif") || path.endsWith(".mp4")) {
             chain.doFilter(request, response);
             return;
         }
 
-        if (path.endsWith("/login") || path.endsWith("/register") || path.endsWith("/")) {
-            if (session.getAttribute("usuario") != null) {
+        if (path.endsWith("/login") || path.endsWith("/register") || path.equals("/")) {
+            if (session != null && session.getAttribute("usuario") != null) {
                 httpResponse.sendRedirect("/home");
                 return;
             }
@@ -39,9 +34,8 @@ public class FilterSession implements Filter {
             return;
         }
 
-        Object usuario = (session != null) ? session.getAttribute("usuario") : null;
-        if (usuario == null) {
-            httpResponse.sendRedirect("/register");
+        if (session == null || session.getAttribute("usuario") == null) {
+            httpResponse.sendRedirect("/login");
             return;
         }
 

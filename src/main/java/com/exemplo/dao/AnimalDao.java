@@ -7,6 +7,7 @@ import lombok.SneakyThrows;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AnimalDao {
@@ -16,9 +17,50 @@ public class AnimalDao {
         this.connection = connection;
     }
 
+    public List<Animal> listarPorEspecie(String[] racas) throws SQLException {
+        String sql = "";
+
+        if (racas == null || racas.length == 0) {
+            sql = "SELECT * FROM Animal";
+        }
+        else {
+            String placeholders = String.join(",", Collections.nCopies(racas.length, "?"));
+            sql = "SELECT * FROM Animal WHERE especie IN (" + placeholders + ")";
+        }
+
+
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            if(racas != null){
+                for (int i = 0; i < racas.length; i++) {
+                    stmt.setString(i + 1, racas[i]);
+                }
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            List<Animal> animais = new ArrayList<>();
+
+            while (rs.next()) {
+                Animal animal = new Animal(
+                        rs.getLong("id"),
+                        rs.getString("nome"),
+                        rs.getString("especie"),
+                        rs.getString("raca"),
+                        rs.getString("sexo"),
+                        rs.getBinaryStream("foto")
+                );
+                animais.add(animal);
+            }
+
+            return animais;
+        }
+    }
+
+
+
     @SneakyThrows
     public List<Animal> select() {
-        String sql = "SELECT * FROM Animal LIMIT 10";
+        String sql = "SELECT * FROM Animal LIMIT 6";
         List<Animal> animais = new ArrayList<>();
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
@@ -45,9 +87,7 @@ public class AnimalDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.close();
-        }
+
 
         return animais;
     }
@@ -70,7 +110,7 @@ public class AnimalDao {
                     animal.setSexo(rs.getString("sexo"));
                     animal.setHistoricoMedico(rs.getString("historico_medico"));
                     animal.setDataDeResgate(rs.getDate("data_de_resgate"));
-
+                    animal.setDataDeNascimento(rs.getDate("data_de_nascimento"));
                     InputStream fotoStream = rs.getBinaryStream("foto");
                     animal.setFoto(fotoStream);
 
@@ -89,7 +129,7 @@ public class AnimalDao {
     public void inserirAnimal(Animal animal, Long idTutor, InputStream foto) throws SQLException {
         String sqlAnimal = "INSERT INTO Animal (nome, especie, raca, data_de_nascimento, data_de_resgate, foto, sexo, historico_medico, status_de_adocao) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);";
         String sqlRelacao = "INSERT INTO Relacao (id_animal, id_usuario, relacao) VALUES (?, ?, ?);";
-        String sqlRegistro = "INSERT INTO Registro (tipo_acao, descricao, pessoa_id, data_acao) VALUES (?, ?, ?, ?);"; // SQL para inserir o Registro
+        String sqlRegistro = "INSERT INTO Registro (tipo_acao, descricao, pessoa_id, data_acao) VALUES (?, ?, ?, ?);"; 
 
         try {
             connection.setAutoCommit(false);

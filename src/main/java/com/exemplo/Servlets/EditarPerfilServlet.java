@@ -55,10 +55,10 @@ public class EditarPerfilServlet extends HttpServlet {
 
             PessoaDao pessoaDao = new PessoaDao(connection);
             pessoaDao.updatePessoa(pessoa);
-
+            pessoa = pessoaDao.selectById(pessoa.getId());
             req.getSession().setAttribute("usuario", pessoa);
 
-            resp.sendRedirect("perfil.jsp");
+            resp.sendRedirect("perfil");
         }
         finally {
             if (connection != null) {

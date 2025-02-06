@@ -29,8 +29,7 @@ public class AnimalPerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        HttpSession session = request.getSession();
-        session.setAttribute("animal", null);
+        request.setAttribute("animal", null);
 
         Connection connection = null;
 
@@ -41,7 +40,7 @@ public class AnimalPerfilServlet extends HttpServlet {
                 AnimalDao animalDao = new AnimalDao(connection);
                 Animal animal = animalDao.selectById(Long.valueOf(id));
 
-                session.setAttribute("animal", animal);
+                request.setAttribute("animal", animal);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/animal.jsp");
                 dispatcher.forward(request, response);
             } else {

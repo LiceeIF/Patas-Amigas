@@ -43,7 +43,7 @@
         </c:if>
         <c:if test="${perfil.adotante}">
             <div class="tags">
-                <a href="">Adotante</a>
+                <a href="/pesquisar">Adotante</a>
             </div>
         </c:if>
         <c:if test="${perfil.tutor}">

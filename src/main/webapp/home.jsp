@@ -17,7 +17,7 @@
             </div>
 
         <div>
-            <b>Animais: </b> <a href="">ver mais...</a>
+            <b>Animais: </b> <a href="/pesquisar">ver mais...</a>
             <div style="border-bottom: 4px solid rgba(242,120,161,0.44); margin-bottom: 2rem; border-radius: 7px">
                 <c:forEach items="${animais}" var="animal">
                     <c:if test="${not empty animal.fotoBase64}">
@@ -29,15 +29,6 @@
                     </c:if>
                 </c:forEach>
             </div>
-        </div>
-        <div>
-            Adotantes <a href="">ver mais...</a>
-        </div>
-        <div>
-            Tutores <a href="">ver mais...</a>
-        </div>
-        <div>
-            Funcionarios <a href="">ver mais...</a>
         </div>
     </div>
 </body>

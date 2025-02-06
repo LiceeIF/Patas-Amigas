@@ -30,6 +30,8 @@ public class Animal {
         this.id = id;
     }
 
+
+
     public Animal(Long id, String nome, String especie, String raca, String sexo, InputStream foto) {
         this.id = id;
         this.nome = nome;
@@ -54,15 +56,18 @@ public class Animal {
     private byte[] fotoByteArray;
 
     public byte[] getFotoByteArray() throws IOException {
-        if (fotoByteArray == null && foto != null) {
+        if (foto == null) {
+            return new byte[0];
+        }
+        if (fotoByteArray == null) {
             fotoByteArray = foto.readAllBytes();
         }
         return fotoByteArray;
     }
+
     public String getFotoBase64() throws IOException {
         return Base64.getEncoder().encodeToString(getFotoByteArray());
     }
-
 
     public enum ADOCAO{
         Adotado,

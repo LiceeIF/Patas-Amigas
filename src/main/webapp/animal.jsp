@@ -47,12 +47,46 @@
             <h2>${animal.nome}</h2>
             <h3>${animal.statusDeAdocao}</h3>
             <div class="infozinhas">
-                Especie: <p>${animal.especie}</p>
-                Raça: <p>${animal.raca}</p>
+                <div class="alinha">
+                    Especie: <p>${animal.especie}</p>
+                </div>
+                <div  class="alinha">
+                    Raça: <p>${animal.raca}</p>
+                </div>
+                
             </div>
             <div class="infozinhas">
-                Data de nascimento: <p>${animal.dataDeNascimento}</p>
-                Data de resgate: <p>${animal.dataDeResgate}</p>
+                <div  class="alinha">
+                    Data de nascimento: <p>${animal.dataDeNascimento}</p>
+                </div>
+                <div  class="alinha">
+                    Data de resgate: <p>${animal.dataDeResgate}</p>
+                </div>
+                
+            </div>
+            <div class="infozinhas">
+                <div class="alinha">
+                    Sexo:
+                    <p>
+                        ${animal.sexo == 'Macho' ? 'Macho ♂' : 'Fêmea ♀️'}
+                    </p>
+                </div>
+                
+                <div  class="alinha">
+                    Data de resgate: <p>${animal.dataDeResgate}</p>
+                </div>
+                
+            </div>
+            <div class="infozinhas">
+                <div class="alinha" style="height: 5rem;">
+                    Histórico Médico 💊❤️‍:
+                    <p>
+                        ${animal.historicoMedico}
+                    </p>
+                </div>
+                
+
+                
             </div>
             <c:if test="${animal.statusDeAdocao == 'BuscandoNovoDono'}">
                 <form method="POST" action="animal">

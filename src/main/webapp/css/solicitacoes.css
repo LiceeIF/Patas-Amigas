@@ -1,26 +1,86 @@
-body {
-    background-color: #fff5ec;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    box-sizing: border-box;
-    height: 85vh;
-}
+    body {
+        background-color: #fff5ec;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        box-sizing: border-box;
+        height: 85vh;
+    }
+    #main{
+        padding-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+        height: 100%;
+    }
 
-#main{
-    padding-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: column;
-    height: 100%;
-}
+    #aceitar{
+        background-color: #a6f8ae;
+        border-color: #0a7114;
+        color: #0a7114;
+        border-radius: 16px;
+        padding: 0.3rem;
+        transition: all ease-in-out 200ms;
+        cursor: pointer;
+        margin: 0.5rem;
+    }
 
-.solicitacao_div{
-    background-color: #ffe8bd;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #f5bd63;
-    border-radius: 15px;
-    margin: 1rem;
-    padding: 0.5rem;
-}
+    #aceitar:hover, #recusar:hover {
+        transform: scale(1.1);
+    }
+
+    #recusar{
+        background-color: #f8a6a6;
+        border-color: #c11010;
+        color: #c11010;
+        border-radius: 16px;
+        padding: 0.3rem;
+        transition: all ease-in-out 200ms;
+        cursor: pointer;
+        margin: 0.5rem;
+
+    }
+
+
+
+
+    .solicitacao_div{
+        background-color: #ffe8bd;
+        border-style: solid;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+        border-width: 3px;
+        border-color: #f5bd63;
+        border-radius: 15px;
+        margin: 1rem;
+        padding: 0.5rem;
+        animation: fadeIn 0.5s ease-in-out;
+        width: 20rem;
+    }
+
+    .sem-solicitacoes {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        color: #4e3710;
+        background-color: rgba(245, 189, 99, 0.27);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 1rem auto;
+        max-width: 600px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
